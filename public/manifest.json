@@ -1,0 +1,27 @@
+{
+  "name": "Ahmad Nouh - AI Engineer Portfolio",
+  "short_name": "Ahmad Nouh",
+  "description": "AI and Backend engineer portfolio showcasing projects and expertise",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["portfolio", "technology", "ai", "engineering"],
+  "lang": "en",
+  "dir": "ltr"
+}

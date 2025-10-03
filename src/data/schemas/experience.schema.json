@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "experiences": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "company": { "type": "string" },
+          "role": { "type": "string" },
+          "duration": { "type": "string" },
+          "description": { "type": "string" },
+          "achievements": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "technologies": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "category": { "enum": ["language", "framework", "tool", "platform"] },
+                "proficiency": { "type": "number", "minimum": 1, "maximum": 5 },
+                "icon": { "type": "string" }
+              },
+              "required": ["name", "category", "proficiency", "icon"]
+            }
+          }
+        },
+        "required": ["id", "company", "role", "duration", "description", "achievements", "technologies"]
+      }
+    },
+    "education": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "institution": { "type": "string" },
+          "degree": { "type": "string" },
+          "field": { "type": "string" },
+          "duration": { "type": "string" },
+          "location": { "type": "string" },
+          "specialization": { "type": "string" }
+        },
+        "required": ["id", "institution", "degree", "field", "duration", "location"]
+      }
+    },
+    "certifications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "issuer": { "type": "string" },
+          "duration": { "type": "string" },
+          "description": { "type": "string" }
+        },
+        "required": ["id", "name", "issuer", "duration"]
+      }
+    }
+  },
+  "required": ["experiences"]
+}

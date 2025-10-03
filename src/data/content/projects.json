@@ -1,0 +1,64 @@
+{
+  "projects": [
+    {
+      "id": "ment-ai-platform",
+      "title": "MENT AI Platform Features",
+      "description": "AI-driven features for privacy-first network intelligence platform",
+      "longDescription": "Developed and optimized AI-driven features for MENT, a privacy-first network intelligence platform helping individuals build meaningful relationships. Built services and pipelines for data enrichment, retrieval, insight generation, and chatbot functionalities with scalable microservices architecture.",
+      "technologies": [
+        { "name": "Python", "category": "language", "proficiency": 5, "icon": "🐍" },
+        { "name": "Machine Learning", "category": "tool", "proficiency": 5, "icon": "🧠" },
+        { "name": "LLM", "category": "tool", "proficiency": 4, "icon": "🤖" },
+        { "name": "Microservices", "category": "platform", "proficiency": 4, "icon": "🖥️" }
+      ],
+      "images": [],
+      "featured": true,
+      "category": "ai-ml"
+    },
+    {
+      "id": "arabic-nlp-tools",
+      "title": "Arabic NLP Tools Suite",
+      "description": "Comprehensive NLP tools for Arabic language processing",
+      "longDescription": "Prototyped and developed Natural Language Processing tools specifically for the Arabic language, including spelling correction, named entity recognition, part of speech tagging, transliteration, and semantic search capabilities. These tools significantly improved the accuracy of Arabic language processing for the platform.",
+      "technologies": [
+        { "name": "Python", "category": "language", "proficiency": 5, "icon": "🐍" },
+        { "name": "TensorFlow", "category": "framework", "proficiency": 4, "icon": "🔥" },
+        { "name": "NLP", "category": "tool", "proficiency": 5, "icon": "🗣️" },
+        { "name": "Deep Learning", "category": "tool", "proficiency": 4, "icon": "🧠" }
+      ],
+      "images": [],
+      "featured": true,
+      "category": "ai-ml"
+    },
+    {
+      "id": "microservices-suite",
+      "title": "AI Microservices Suite",
+      "description": "Collection of AI-powered microservices for data processing",
+      "longDescription": "Designed and developed multiple microservices using Flask, Spring Boot, and Go-fiber frameworks. Includes a spam filter service for filtering spam queries, a synonym extraction service for automatically extracting synonyms from search queries, and an English-to-Arabic transliteration service.",
+      "technologies": [
+        { "name": "Flask", "category": "framework", "proficiency": 4, "icon": "🧪" },
+        { "name": "Spring Boot", "category": "framework", "proficiency": 4, "icon": "🌱" },
+        { "name": "Go", "category": "language", "proficiency": 4, "icon": "🐹" },
+        { "name": "Microservices", "category": "platform", "proficiency": 4, "icon": "🖥️" }
+      ],
+      "images": [],
+      "featured": true,
+      "category": "ai-ml"
+    },
+    {
+      "id": "web-mobile-apps",
+      "title": "Web & Mobile Applications",
+      "description": "Full-stack web and mobile application development",
+      "longDescription": "Contributed to the development of multiple web and mobile applications, working across both front-end and back-end. Developed responsive front-end applications using Angular, built cross-platform mobile applications with Ionic Framework, and designed admin dashboards for managing users, content, and operations.",
+      "technologies": [
+        { "name": "Angular", "category": "framework", "proficiency": 4, "icon": "🅰️" },
+        { "name": "Ionic", "category": "framework", "proficiency": 4, "icon": "⚡" },
+        { "name": "Node.js", "category": "platform", "proficiency": 4, "icon": "🟢" },
+        { "name": "TypeScript", "category": "language", "proficiency": 4, "icon": "🔷" }
+      ],
+      "images": [],
+      "featured": false,
+      "category": "web-development"
+    }
+  ]
+}

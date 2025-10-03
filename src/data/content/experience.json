@@ -1,0 +1,180 @@
+{
+  "experiences": [
+    {
+      "id": "ment-ai-engineer",
+      "company": "MENT",
+      "role": "AI Engineer",
+      "duration": "OCTOBER 2023 - PRESENT",
+      "description": "AI Engineer at MENT, a privacy-first network intelligence platform helping individuals build meaningful relationships.",
+      "achievements": [
+        "Researched, developed, and optimized AI-driven features for MENT platform",
+        "Built and maintained services and pipelines for data enrichment, retrieval, insight generation, and chatbot functionalities",
+        "Designed scalable and efficient microservices to support high-performance backend communication and data processing",
+        "Collaborated with cross-functional teams to deliver innovative AI solutions that enhanced platform reliability and user experience",
+        "Optimized AI models and pipelines to align with business goals, improving accuracy, efficiency, and user satisfaction",
+        "Applied prompt engineering and fine-tuning techniques to improve LLM performance",
+        "Stayed current with advancements in AI and backend technologies, integrating innovations to enhance platform features"
+      ],
+      "technologies": [
+        {
+          "name": "Python",
+          "category": "language",
+          "proficiency": 5,
+          "icon": "🐍"
+        },
+        {
+          "name": "Machine Learning",
+          "category": "tool",
+          "proficiency": 5,
+          "icon": "🧠"
+        },
+        {
+          "name": "LLM",
+          "category": "tool",
+          "proficiency": 4,
+          "icon": "🤖"
+        },
+        {
+          "name": "Microservices",
+          "category": "platform",
+          "proficiency": 4,
+          "icon": "🖥️"
+        }
+      ]
+    },
+    {
+      "id": "lableb-ai-engineer",
+      "company": "Lableb",
+      "role": "AI Engineer",
+      "duration": "APRIL 2020 - SEPTEMBER 2023",
+      "description": "AI Engineer focused on Machine Learning, Deep Learning systems, and Arabic NLP tools development.",
+      "achievements": [
+        "Conducted extensive research and experimentation with modern ML and DL systems",
+        "Maintained, optimized, and deployed ML & DL systems ensuring high performance and reliability",
+        "Designed and developed microservices using Flask, Spring Boot, and Go-fiber frameworks",
+        "Built spam filter service, synonym extraction service, and English-to-Arabic transliteration service",
+        "Prepared, transformed, and analyzed data using pandas, matplotlib, and seaborn for business insights",
+        "Prototyped NLP tools for Arabic language including spelling correction, NER, POS tagging, and semantic search"
+      ],
+      "technologies": [
+        {
+          "name": "Python",
+          "category": "language",
+          "proficiency": 5,
+          "icon": "🐍"
+        },
+        {
+          "name": "Flask",
+          "category": "framework",
+          "proficiency": 4,
+          "icon": "🧪"
+        },
+        {
+          "name": "Spring Boot",
+          "category": "framework",
+          "proficiency": 4,
+          "icon": "🌱"
+        },
+        {
+          "name": "Go",
+          "category": "language",
+          "proficiency": 4,
+          "icon": "🐹"
+        },
+        {
+          "name": "TensorFlow",
+          "category": "framework",
+          "proficiency": 4,
+          "icon": "🔥"
+        },
+        {
+          "name": "Pandas",
+          "category": "tool",
+          "proficiency": 5,
+          "icon": "🐼"
+        }
+      ]
+    },
+    {
+      "id": "code-experts-fullstack",
+      "company": "Code Experts",
+      "role": "Web Developer (Full-Stack)",
+      "duration": "OCTOBER 2018 - JANUARY 2020",
+      "description": "Full-stack web developer contributing to multiple web and mobile applications.",
+      "achievements": [
+        "Contributed to development of multiple web and mobile applications",
+        "Developed responsive front-end applications using Angular",
+        "Built cross-platform mobile applications with Ionic Framework",
+        "Designed and implemented admin dashboards for managing users, content, and operations",
+        "Contributed to back-end development with Node.js, improving system functionality and performance",
+        "Supported various company projects handling both front-end and full-stack tasks"
+      ],
+      "technologies": [
+        {
+          "name": "Angular",
+          "category": "framework",
+          "proficiency": 4,
+          "icon": "🅰️"
+        },
+        {
+          "name": "Ionic",
+          "category": "framework",
+          "proficiency": 4,
+          "icon": "⚡"
+        },
+        {
+          "name": "Node.js",
+          "category": "platform",
+          "proficiency": 4,
+          "icon": "🟢"
+        },
+        {
+          "name": "JavaScript",
+          "category": "language",
+          "proficiency": 4,
+          "icon": "🟨"
+        },
+        {
+          "name": "TypeScript",
+          "category": "language",
+          "proficiency": 4,
+          "icon": "🔷"
+        }
+      ]
+    }
+  ],
+  "education": [
+    {
+      "id": "damascus-university",
+      "institution": "Damascus University",
+      "degree": "Bachelor's Degree",
+      "field": "Information Technology Engineering",
+      "duration": "2015-2021",
+      "location": "Syria, Damascus",
+      "specialization": "Artificial Intelligence"
+    }
+  ],
+  "certifications": [
+    {
+      "id": "neural-networks-dl",
+      "name": "Neural Networks and Deep Learning",
+      "issuer": "DeepLearning.AI",
+      "duration": "AUGUST 2020 - SEPTEMBER 2020",
+      "description": "Comprehensive course on neural networks and deep learning fundamentals"
+    },
+    {
+      "id": "tensorflow-developer",
+      "name": "TensorFlow Developer specialization",
+      "issuer": "DeepLearning.AI",
+      "duration": "MAY 2021 - JULY 2021",
+      "description": "Specialization in TensorFlow for machine learning development"
+    },
+    {
+      "id": "ml-production",
+      "name": "Introduction to Machine Learning in Production",
+      "issuer": "DeepLearning.AI",
+      "duration": "JUNE 2021 - JULY 2022",
+      "description": "Course focused on deploying and maintaining ML systems in production"
+    }
+  ]
+}

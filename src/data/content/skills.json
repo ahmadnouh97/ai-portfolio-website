@@ -1,0 +1,42 @@
+{
+  "skills": [
+    { "name": "Machine Learning", "level": 5, "category": "technical" },
+    { "name": "Deep Learning", "level": 5, "category": "technical" },
+    { "name": "NLP", "level": 5, "category": "technical" },
+    { "name": "Data Analysis", "level": 4, "category": "technical" },
+    { "name": "Automation", "level": 4, "category": "technical" },
+    { "name": "Prompt Engineering", "level": 4, "category": "technical" },
+    { "name": "Research", "level": 5, "category": "technical" },
+    { "name": "Web Development", "level": 4, "category": "technical" },
+    { "name": "Problem Solving", "level": 5, "category": "soft" },
+    { "name": "Version Control", "level": 4, "category": "technical" },
+    { "name": "Microservices", "level": 4, "category": "technical" },
+    { "name": "Arabic", "level": 5, "category": "language" },
+    { "name": "English", "level": 3, "category": "language" },
+    { "name": "Turkish", "level": 3, "category": "language" }
+  ],
+  "technologies": [
+    { "name": "Python", "category": "language", "proficiency": 5, "icon": "🐍" },
+    { "name": "Go", "category": "language", "proficiency": 4, "icon": "🐹" },
+    { "name": "Java", "category": "language", "proficiency": 4, "icon": "☕" },
+    { "name": "JavaScript", "category": "language", "proficiency": 4, "icon": "🟨" },
+    { "name": "Langchain", "category": "framework", "proficiency": 4, "icon": "🔗" },
+    { "name": "TensorFlow", "category": "framework", "proficiency": 4, "icon": "🔥" },
+    { "name": "Keras", "category": "framework", "proficiency": 4, "icon": "🧠" },
+    { "name": "Scikit-learn", "category": "framework", "proficiency": 4, "icon": "🔬" },
+    { "name": "Pandas", "category": "tool", "proficiency": 5, "icon": "🐼" },
+    { "name": "Numpy", "category": "tool", "proficiency": 4, "icon": "🔢" },
+    { "name": "Seaborn", "category": "tool", "proficiency": 4, "icon": "📊" },
+    { "name": "FastAPI", "category": "framework", "proficiency": 4, "icon": "⚡" },
+    { "name": "Django", "category": "framework", "proficiency": 4, "icon": "🎸" },
+    { "name": "RabbitMQ", "category": "tool", "proficiency": 3, "icon": "🐰" },
+    { "name": "Celery", "category": "tool", "proficiency": 3, "icon": "🥬" },
+    { "name": "SQL", "category": "language", "proficiency": 4, "icon": "🗄️" },
+    { "name": "MongoDB", "category": "tool", "proficiency": 4, "icon": "🍃" },
+    { "name": "Neo4j", "category": "tool", "proficiency": 3, "icon": "🕸️" },
+    { "name": "Docker", "category": "tool", "proficiency": 3, "icon": "🐳" },
+    { "name": "AWS", "category": "platform", "proficiency": 3, "icon": "☁️" },
+    { "name": "Azure", "category": "platform", "proficiency": 3, "icon": "🔵" },
+    { "name": "Kubernetes", "category": "platform", "proficiency": 3, "icon": "⚙️" }
+  ]
+}

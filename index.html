@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    
+    <!-- Preconnect to external domains for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Favicon and Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    
+    <!-- Viewport and Mobile Optimization -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#3b82f6" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    
+    <!-- Basic SEO Meta Tags -->
+    <title>Ahmad Nouh - AI Engineer & Backend Developer</title>
+    <meta name="description" content="AI and Backend engineer with 5+ years of experience building intelligent systems and scalable solutions. Specializing in machine learning, NLP, and backend architecture." />
+    <meta name="keywords" content="AI Engineer, Machine Learning, Backend Developer, NLP, Python, TensorFlow, FastAPI, Data Science, Ahmad Nouh" />
+    <meta name="author" content="Ahmad Nouh" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ahmad Nouh - AI Engineer & Backend Developer" />
+    <meta property="og:description" content="AI and Backend engineer with 5+ years of experience building intelligent systems and scalable solutions." />
+    <meta property="og:image" content="/og-image.jpg" />
+    <meta property="og:url" content="https://ahmadnouh.dev" />
+    <meta property="og:site_name" content="Ahmad Nouh Portfolio" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ahmad Nouh - AI Engineer & Backend Developer" />
+    <meta name="twitter:description" content="AI and Backend engineer with 5+ years of experience building intelligent systems and scalable solutions." />
+    <meta name="twitter:image" content="/og-image.jpg" />
+    <meta name="twitter:creator" content="@ahmadnouh" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://ahmadnouh.dev" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin />
+    
+    <!-- Critical CSS will be inlined here by Vite -->
+    <style>
+      /* Critical CSS for above-the-fold content */
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+          'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      
+      /* Loading spinner */
+      .loading-spinner {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 40px;
+        height: 40px;
+        border: 4px solid #f3f4f6;
+        border-top: 4px solid #3b82f6;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        z-index: 9999;
+      }
+      
+      @keyframes spin {
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
+      }
+      
+      /* Hide loading spinner when app loads */
+      .app-loaded .loading-spinner {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loading spinner -->
+    <div class="loading-spinner"></div>
+    
+    <!-- Main app container -->
+    <div id="root"></div>
+    
+    <!-- Main application script -->
+    <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Ahmad Nouh",
+      "jobTitle": "AI Engineer & Backend Developer",
+      "description": "AI and Backend engineer with 5+ years of experience building intelligent systems and scalable solutions.",
+      "url": "https://ahmadnouh.dev",
+      "sameAs": [
+        "https://linkedin.com/in/ahmadnouh",
+        "https://github.com/ahmadnouh"
+      ],
+      "knowsAbout": [
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Natural Language Processing",
+        "Backend Development",
+        "Python Programming",
+        "Data Science"
+      ]
+    }
+    </script>
+  </body>
+</html>

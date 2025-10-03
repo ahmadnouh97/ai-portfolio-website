@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "projects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "longDescription": { "type": "string" },
+          "technologies": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "category": { "enum": ["language", "framework", "tool", "platform"] },
+                "proficiency": { "type": "number", "minimum": 1, "maximum": 5 },
+                "icon": { "type": "string" }
+              },
+              "required": ["name", "category", "proficiency", "icon"]
+            }
+          },
+          "images": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "demoUrl": { "type": "string", "format": "uri" },
+          "githubUrl": { "type": "string", "format": "uri" },
+          "featured": { "type": "boolean" },
+          "category": { "enum": ["ai-ml", "web-development", "data-science", "automation", "research"] },
+          "metrics": {
+            "type": "object",
+            "properties": {
+              "stars": { "type": "number" },
+              "forks": { "type": "number" },
+              "downloads": { "type": "number" },
+              "users": { "type": "number" }
+            }
+          }
+        },
+        "required": ["id", "title", "description", "longDescription", "technologies", "images", "featured", "category"]
+      }
+    }
+  },
+  "required": ["projects"]
+}

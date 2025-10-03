@@ -1,0 +1,18 @@
+{
+  "name": "Ahmad Nouh",
+  "title": "AI & Backend Engineer",
+  "tagline": "Building intelligent systems and scalable backend solutions",
+  "bio": "I'm an AI and Backend engineer with about five years of experience building intelligent systems and scalable backend solutions. I enjoy turning complex ideas into practical tools, whether it's creating machine learning features or developing robust backend architectures. I'm always eager to learn, improve, and deliver impactful results that solve real-world problems.",
+  "location": "Turkey, Istanbul",
+  "availability": "Available for opportunities",
+  "contact": {
+    "email": "ahmadnouh428@gmail.com"
+  },
+  "socialLinks": [
+    {
+      "name": "LinkedIn",
+      "url": "https://linkedin.com/in/ahmad-nouh",
+      "icon": "💼"
+    }
+  ]
+}
