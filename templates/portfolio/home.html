@@ -63,7 +63,7 @@ Engineer Portfolio{% endif %}
             {% endif %}
 
             <!-- Name with Typing Animation -->
-            <div class="animate-on-scroll" style="animation-delay: 0.2s;">
+            <div class="animate-on-scroll" style="animation-delay: 0s;">
                 <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
                     <span
                         class="bg-gradient-to-r from-primary-600 to-blue-600 dark:from-primary-400 dark:to-blue-400 bg-clip-text text-transparent">
@@ -125,7 +125,7 @@ Engineer Portfolio{% endif %}
             </div>
 
             <!-- Enhanced Social Links -->
-            <div class="animate-on-scroll flex justify-center space-x-6" style="animation-delay: 1s;">
+            <div class="animate-on-scroll flex justify-center space-x-6 mb-16" style="animation-delay: 1s;">
                 {% if profile.github_url %}
                 <a href="{{ profile.github_url }}" target="_blank"
                     class="group p-3 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-white hover:bg-gray-900 dark:hover:bg-gray-600 transition-all duration-300 transform hover:scale-110 hover:shadow-lg"
@@ -173,8 +173,8 @@ Engineer Portfolio{% endif %}
             </div>
 
             <!-- Scroll Indicator -->
-            <div class="animate-on-scroll absolute bottom-8 left-1/2 transform -translate-x-1/2"
-                style="animation-delay: 1.2s;">
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer scroll-indicator"
+                style="opacity: 0; animation: fadeIn 0.8s ease-out 1.2s forwards;">
                 <div class="flex flex-col items-center space-y-2">
                     <span class="text-sm text-gray-500 dark:text-gray-400">Scroll to explore</span>
                     <div
@@ -443,39 +443,48 @@ Engineer Portfolio{% endif %}
         <!-- Experience Timeline -->
         <div class="relative">
             <!-- Timeline Line -->
-            <div class="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary-300 via-primary-400 to-primary-500 dark:from-primary-600 dark:via-primary-500 dark:to-primary-400"></div>
+            <div
+                class="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary-300 via-primary-400 to-primary-500 dark:from-primary-600 dark:via-primary-500 dark:to-primary-400">
+            </div>
 
             <div class="space-y-10 md:space-y-12">
                 {% for experience in experiences %}
-                <div class="relative animate-on-scroll group" style="animation-delay: {{ forloop.counter0|add:1|floatformat:1 }}s;"
-                     role="article" 
-                     aria-label="Experience at {{ experience.company }}">
+                <div class="relative animate-on-scroll group"
+                    style="animation-delay: {{ forloop.counter0|add:1|floatformat:1 }}s;" role="article"
+                    aria-label="Experience at {{ experience.company }}">
                     <!-- Timeline Dot -->
                     <div class="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-8 w-4 h-4 bg-white dark:bg-gray-900 rounded-full border-2 border-primary-500 dark:border-primary-400 shadow-lg group-hover:scale-110 transition-transform duration-300 z-20"
-                         aria-hidden="true">
+                        aria-hidden="true">
                         {% if experience.is_current %}
                         <div class="absolute inset-0 rounded-full bg-primary-500 dark:bg-primary-400 animate-pulse"
-                             title="Current Position"></div>
+                            title="Current Position"></div>
                         {% endif %}
                     </div>
 
                     <!-- Experience Card -->
-                    <div class="ml-12 {% if forloop.counter0|divisibleby:2 %}md:w-1/2 md:pr-8 md:ml-0{% else %}md:w-1/2 md:pl-8 md:ml-auto md:mr-0{% endif %}">
-                        <div class="bg-white dark:bg-gray-900 rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-200 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-600 group-hover:bg-gradient-to-br group-hover:from-white group-hover:to-primary-50 dark:group-hover:from-gray-900 dark:group-hover:to-gray-800">
-                            
+                    <div
+                        class="ml-12 {% if forloop.counter0|divisibleby:2 %}md:w-1/2 md:pr-8 md:ml-0{% else %}md:w-1/2 md:pl-8 md:ml-auto md:mr-0{% endif %}">
+                        <div
+                            class="bg-white dark:bg-gray-900 rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-200 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-600 group-hover:bg-gradient-to-br group-hover:from-white group-hover:to-primary-50 dark:group-hover:from-gray-900 dark:group-hover:to-gray-800">
+
                             <!-- Header with improved layout -->
                             <div class="mb-8">
                                 <!-- Position Title -->
-                                <h3 class="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-6 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300">
+                                <h3
+                                    class="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-6 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300">
                                     {{ experience.position }}
                                 </h3>
-                                
+
                                 <!-- Company Information -->
                                 <div class="mb-4">
                                     <div class="flex items-center space-x-3 mb-3">
-                                        <div class="w-8 h-8 bg-primary-100 dark:bg-primary-900 rounded-md flex items-center justify-center">
-                                            <svg class="w-4 h-4 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                                        <div
+                                            class="w-8 h-8 bg-primary-100 dark:bg-primary-900 rounded-md flex items-center justify-center">
+                                            <svg class="w-4 h-4 text-primary-600 dark:text-primary-400" fill="none"
+                                                stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                                </path>
                                             </svg>
                                         </div>
                                         <div>
@@ -487,23 +496,28 @@ Engineer Portfolio{% endif %}
                                             </p>
                                         </div>
                                     </div>
-                                    
+
                                     <!-- Duration Information -->
                                     <div class="flex items-center justify-between">
                                         <div class="flex items-center space-x-2">
-                                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z">
+                                                </path>
                                             </svg>
                                             <span class="text-sm text-gray-600 dark:text-gray-300">
-                                                {{ experience.start_date|date:"M Y" }} - 
+                                                {{ experience.start_date|date:"M Y" }} -
                                                 {% if experience.is_current %}
-                                                    <span class="text-green-600 dark:text-green-400 font-semibold">Present</span>
+                                                <span
+                                                    class="text-green-600 dark:text-green-400 font-semibold">Present</span>
                                                 {% else %}
-                                                    {{ experience.end_date|date:"M Y" }}
+                                                {{ experience.end_date|date:"M Y" }}
                                                 {% endif %}
                                             </span>
                                         </div>
-                                        <div class="bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 px-3 py-1 rounded-full text-xs font-medium">
+                                        <div
+                                            class="bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 px-3 py-1 rounded-full text-xs font-medium">
                                             {{ experience.duration }}
                                         </div>
                                     </div>
@@ -520,30 +534,38 @@ Engineer Portfolio{% endif %}
                             <!-- Achievements -->
                             {% if experience.achievements %}
                             <div class="mb-6">
-                                <button class="achievements-toggle w-full text-left mb-4 flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-lg p-0 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200"
-                                    aria-expanded="false"
-                                    aria-controls="achievements-{{ experience.id }}"
+                                <button
+                                    class="achievements-toggle w-full text-left mb-4 flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-lg p-0 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200"
+                                    aria-expanded="false" aria-controls="achievements-{{ experience.id }}"
                                     data-experience-id="{{ experience.id }}">
                                     <div class="flex items-center">
-                                        <div class="w-6 h-6 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mr-2">
-                                            <svg class="w-3.5 h-3.5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        <div
+                                            class="w-6 h-6 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mr-2">
+                                            <svg class="w-3.5 h-3.5 text-green-600 dark:text-green-400" fill="none"
+                                                stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7"></path>
                                             </svg>
                                         </div>
                                         <h4 class="text-base font-semibold text-gray-900 dark:text-white">
                                             Key Achievements ({{ experience.achievements|length }})
                                         </h4>
                                     </div>
-                                    <svg class="w-5 h-5 text-gray-400 transform transition-transform duration-200 chevron-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    <svg class="w-5 h-5 text-gray-400 transform transition-transform duration-200 chevron-icon"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
                                     </svg>
                                 </button>
-                                <div id="achievements-{{ experience.id }}" class="achievements-content hidden overflow-hidden transition-all duration-300 ease-in-out">
+                                <div id="achievements-{{ experience.id }}"
+                                    class="achievements-content hidden overflow-hidden transition-all duration-300 ease-in-out">
                                     <ul class="space-y-3">
                                         {% for achievement in experience.achievements %}
-                                        <li class="flex items-start space-x-3 animate-on-scroll" style="animation-delay: {{ forloop.counter0|add:1|floatformat:1 }}s;">
+                                        <li class="flex items-start space-x-3 animate-on-scroll"
+                                            style="animation-delay: {{ forloop.counter0|add:1|floatformat:1 }}s;">
                                             <div class="flex-shrink-0 w-2 h-2 bg-primary-500 rounded-full mt-2"></div>
-                                            <span class="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">{{ achievement }}</span>
+                                            <span class="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">{{
+                                                achievement }}</span>
                                         </li>
                                         {% endfor %}
                                     </ul>
@@ -554,17 +576,23 @@ Engineer Portfolio{% endif %}
                             <!-- Technologies -->
                             {% if experience.technologies.exists %}
                             <div>
-                                <h4 class="text-base font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                                    <div class="w-6 h-6 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-2">
-                                        <svg class="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                                <h4
+                                    class="text-base font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+                                    <div
+                                        class="w-6 h-6 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-2">
+                                        <svg class="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z">
+                                            </path>
                                         </svg>
                                     </div>
                                     Technologies Used
                                 </h4>
                                 <div class="flex flex-wrap gap-2">
                                     {% for tech in experience.technologies.all %}
-                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 hover:bg-primary-200 dark:hover:bg-primary-800 transition-colors duration-200">
+                                    <span
+                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 hover:bg-primary-200 dark:hover:bg-primary-800 transition-colors duration-200">
                                         {{ tech.name }}
                                     </span>
                                     {% endfor %}
@@ -637,20 +665,19 @@ Engineer Portfolio{% endif %}
         <!-- Technology Filter -->
         <div class="mb-12 animate-on-scroll">
             <div class="flex flex-wrap justify-center gap-3">
-                <button class="filter-btn active" data-filter="all" 
-                    aria-label="Show all projects"
+                <button class="filter-btn active" data-filter="all" aria-label="Show all projects"
                     class="px-4 py-2 rounded-full text-sm font-medium bg-primary-600 text-white hover:bg-primary-700 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
                     All Projects
                 </button>
                 {% regroup projects by technologies.all as projects_by_tech %}
                 {% for tech_group in projects_by_tech %}
-                    {% for tech in tech_group.list.0.technologies.all %}
-                        <button class="filter-btn" data-filter="{{ tech.name|slugify }}"
-                            aria-label="Filter projects by {{ tech.name }}"
-                            class="px-4 py-2 rounded-full text-sm font-medium bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
-                            {{ tech.name }}
-                        </button>
-                    {% endfor %}
+                {% for tech in tech_group.list.0.technologies.all %}
+                <button class="filter-btn" data-filter="{{ tech.name|slugify }}"
+                    aria-label="Filter projects by {{ tech.name }}"
+                    class="px-4 py-2 rounded-full text-sm font-medium bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
+                    {{ tech.name }}
+                </button>
+                {% endfor %}
                 {% endfor %}
             </div>
         </div>
@@ -661,17 +688,14 @@ Engineer Portfolio{% endif %}
             <div class="project-card group animate-on-scroll bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-gray-200 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-600 flex flex-col h-full"
                 style="animation-delay: {{ forloop.counter0|add:1|floatformat:1 }}s;"
                 data-technologies="{% for tech in project.technologies.all %}{{ tech.name|slugify }} {% endfor %}"
-                data-project-id="{{ project.id }}"
-                role="article"
-                aria-label="Project: {{ project.title }}">
+                data-project-id="{{ project.id }}" role="article" aria-label="Project: {{ project.title }}">
                 <!-- Project Image -->
                 <div
                     class="relative overflow-hidden bg-gradient-to-br from-primary-50 to-blue-50 dark:from-gray-700 dark:to-gray-800 h-48">
                     {% if project.image %}
                     <img src="{{ project.image.url }}" alt="Screenshot of {{ project.title }} project"
                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        loading="lazy"
-                        decoding="async">
+                        loading="lazy" decoding="async">
                     {% else %}
                     <!-- Placeholder for projects without images -->
                     <div class="w-full h-full flex items-center justify-center">
@@ -762,7 +786,8 @@ Engineer Portfolio{% endif %}
                             <a href="{{ project.demo_url }}" target="_blank" rel="noopener noreferrer"
                                 class="inline-flex items-center text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-200"
                                 aria-label="View {{ project.title }} live demo">
-                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14">
                                     </path>
@@ -772,10 +797,12 @@ Engineer Portfolio{% endif %}
                             {% endif %}
 
                             {% if project.detailed_description %}
-                            <button class="view-more-btn inline-flex items-center text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-200"
+                            <button
+                                class="view-more-btn inline-flex items-center text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-200"
                                 data-project-id="{{ project.id }}"
                                 aria-label="View more details about {{ project.title }}">
-                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
                                     </path>
@@ -850,13 +877,16 @@ Engineer Portfolio{% endif %}
 </section>
 
 <!-- Project Modal -->
-<div id="project-modal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+<div id="project-modal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog"
+    aria-modal="true">
     <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <!-- Background overlay -->
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" id="modal-backdrop"></div>
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" id="modal-backdrop">
+        </div>
 
         <!-- Modal panel -->
-        <div class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full">
+        <div
+            class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full">
             <!-- Modal header -->
             <div class="bg-white dark:bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div class="flex items-start justify-between">
@@ -868,9 +898,12 @@ Engineer Portfolio{% endif %}
                             Project Date
                         </p>
                     </div>
-                    <button type="button" class="bg-white dark:bg-gray-800 rounded-md text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-500" id="close-modal" aria-label="Close modal">
+                    <button type="button"
+                        class="bg-white dark:bg-gray-800 rounded-md text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                        id="close-modal" aria-label="Close modal">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
                 </div>
@@ -901,15 +934,20 @@ Engineer Portfolio{% endif %}
 
                 <!-- Project links -->
                 <div class="flex flex-col sm:flex-row gap-4">
-                    <a id="modal-github-link" href="#" target="_blank" rel="noopener noreferrer" class="hidden inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-200">
+                    <a id="modal-github-link" href="#" target="_blank" rel="noopener noreferrer"
+                        class="hidden inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-200">
                         <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                            <path
+                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                         </svg>
                         View on GitHub
                     </a>
-                    <a id="modal-demo-link" href="#" target="_blank" rel="noopener noreferrer" class="hidden inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                    <a id="modal-demo-link" href="#" target="_blank" rel="noopener noreferrer"
+                        class="hidden inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                         </svg>
                         View Live Demo
                     </a>

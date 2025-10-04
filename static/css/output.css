@@ -1426,6 +1426,20 @@ body {
   animation: bounce 1s infinite;
 }
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
 @keyframes ping {
   75%, 100% {
     transform: scale(2);
@@ -1461,6 +1475,10 @@ body {
 
 .animate-slide-down {
   animation: slideDown 0.3s ease-out;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .grid-cols-1 {
@@ -2318,6 +2336,10 @@ body {
   opacity: 1;
 }
 
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
 /* Enhanced Animations */
 
 .animate-blob {
@@ -2491,6 +2513,16 @@ body {
 
   100% {
     background-position: 200% 0;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
 

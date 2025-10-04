@@ -307,19 +307,19 @@ class HeroInteractions {
                 if (i < text.length) {
                     heroTitle.textContent += text.charAt(i);
                     i++;
-                    setTimeout(typeWriter, 100);
+                    setTimeout(typeWriter, 60);
                 } else {
                     heroTitle.style.borderRight = 'none';
                 }
             };
             
-            // Start typing effect after a delay
-            setTimeout(typeWriter, 1000);
+            // Start typing effect immediately
+            setTimeout(typeWriter, 100);
         }
     }
     
     setupScrollIndicator() {
-        const scrollIndicator = document.querySelector('#home .animate-bounce');
+        const scrollIndicator = document.querySelector('.scroll-indicator');
         if (scrollIndicator) {
             scrollIndicator.addEventListener('click', () => {
                 const aboutSection = document.getElementById('about');
