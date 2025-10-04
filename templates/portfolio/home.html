@@ -1,0 +1,1032 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% if profile %}{{ profile.full_name }} - {{ profile.title }}{% else %}AI Engineer Portfolio{% endif %}
+{% endblock %}
+
+{% block meta_description %}
+{% if profile %}{{ profile.meta_description|default:"Professional AI Engineer Portfolio" }}{% else %}Professional AI
+Engineer Portfolio{% endif %}
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section id="home"
+    class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 overflow-hidden">
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0 overflow-hidden">
+        <div
+            class="absolute -top-40 -right-40 w-80 h-80 bg-primary-200 dark:bg-primary-900 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-xl opacity-70 animate-blob">
+        </div>
+        <div
+            class="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-200 dark:bg-blue-900 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-xl opacity-70 animate-blob animation-delay-2000">
+        </div>
+        <div
+            class="absolute top-40 left-40 w-80 h-80 bg-purple-200 dark:bg-purple-900 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-xl opacity-70 animate-blob animation-delay-4000">
+        </div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="text-center">
+            {% if profile %}
+            <!-- Profile Image with Enhanced Animation -->
+            {% if profile.profile_image %}
+            <div class="mb-8 animate-on-scroll">
+                <div class="relative inline-block">
+                    <img src="{{ profile.profile_image.url }}" alt="{{ profile.full_name }}"
+                        class="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full mx-auto object-cover border-4 border-white dark:border-gray-700 shadow-2xl transform hover:scale-105 transition-all duration-300"
+                        loading="eager">
+                    <!-- Animated Ring -->
+                    <div
+                        class="absolute inset-0 rounded-full border-2 border-primary-400 dark:border-primary-500 animate-ping opacity-75">
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <!-- Placeholder Avatar -->
+            <div class="mb-8 animate-on-scroll">
+                <div class="relative inline-block">
+                    <div
+                        class="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full mx-auto bg-gradient-to-br from-primary-400 to-blue-500 flex items-center justify-center border-4 border-white dark:border-gray-700 shadow-2xl">
+                        <svg class="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 text-white" fill="currentColor"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                        </svg>
+                    </div>
+                    <!-- Animated Ring -->
+                    <div
+                        class="absolute inset-0 rounded-full border-2 border-primary-400 dark:border-primary-500 animate-ping opacity-75">
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Name with Typing Animation -->
+            <div class="animate-on-scroll" style="animation-delay: 0.2s;">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
+                    <span
+                        class="bg-gradient-to-r from-primary-600 to-blue-600 dark:from-primary-400 dark:to-blue-400 bg-clip-text text-transparent">
+                        {{ profile.full_name }}
+                    </span>
+                </h1>
+            </div>
+
+            <!-- Title with Slide Animation -->
+            <div class="animate-on-scroll" style="animation-delay: 0.4s;">
+                <h2 class="text-xl md:text-2xl lg:text-3xl text-primary-600 dark:text-primary-400 mb-6 font-medium">
+                    {{ profile.title }}
+                </h2>
+            </div>
+
+            <!-- Bio with Fade Animation -->
+            <div class="animate-on-scroll" style="animation-delay: 0.6s;">
+                <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto mb-8 leading-relaxed">
+                    {{ profile.bio }}
+                </p>
+            </div>
+
+            <!-- CTA Buttons with Enhanced Styling -->
+            <div class="animate-on-scroll flex flex-col sm:flex-row gap-4 justify-center items-center mb-8"
+                style="animation-delay: 0.8s;">
+                <a href="#contact"
+                    class="group bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg flex items-center space-x-2">
+                    <span>Get In Touch</span>
+                    <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </a>
+
+                {% if profile.resume_file %}
+                <a href="{{ profile.resume_file.url }}" target="_blank"
+                    download="{{ profile.full_name|slugify }}-resume.pdf"
+                    class="group border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg flex items-center space-x-2"
+                    aria-label="Download {{ profile.full_name }}'s resume as PDF">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                        </path>
+                    </svg>
+                    <span>Download Resume</span>
+                </a>
+                {% else %}
+                <a href="#contact"
+                    class="group border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg flex items-center space-x-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                        </path>
+                    </svg>
+                    <span>Request Resume</span>
+                </a>
+                {% endif %}
+            </div>
+
+            <!-- Enhanced Social Links -->
+            <div class="animate-on-scroll flex justify-center space-x-6" style="animation-delay: 1s;">
+                {% if profile.github_url %}
+                <a href="{{ profile.github_url }}" target="_blank"
+                    class="group p-3 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-white hover:bg-gray-900 dark:hover:bg-gray-600 transition-all duration-300 transform hover:scale-110 hover:shadow-lg"
+                    aria-label="GitHub Profile">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                    </svg>
+                </a>
+                {% endif %}
+
+                {% if profile.linkedin_url %}
+                <a href="{{ profile.linkedin_url }}" target="_blank"
+                    class="group p-3 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-white hover:bg-blue-600 transition-all duration-300 transform hover:scale-110 hover:shadow-lg"
+                    aria-label="LinkedIn Profile">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                    </svg>
+                </a>
+                {% endif %}
+
+                {% if profile.twitter_url %}
+                <a href="{{ profile.twitter_url }}" target="_blank"
+                    class="group p-3 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-white hover:bg-blue-400 transition-all duration-300 transform hover:scale-110 hover:shadow-lg"
+                    aria-label="Twitter Profile">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                    </svg>
+                </a>
+                {% endif %}
+
+                {% if profile.email %}
+                <a href="mailto:{{ profile.email }}"
+                    class="group p-3 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-white hover:bg-red-500 transition-all duration-300 transform hover:scale-110 hover:shadow-lg"
+                    aria-label="Email Contact">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                        </path>
+                    </svg>
+                </a>
+                {% endif %}
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="animate-on-scroll absolute bottom-8 left-1/2 transform -translate-x-1/2"
+                style="animation-delay: 1.2s;">
+                <div class="flex flex-col items-center space-y-2">
+                    <span class="text-sm text-gray-500 dark:text-gray-400">Scroll to explore</span>
+                    <div
+                        class="w-6 h-10 border-2 border-gray-400 dark:border-gray-500 rounded-full flex justify-center">
+                        <div class="w-1 h-3 bg-gray-400 dark:bg-gray-500 rounded-full mt-2 animate-bounce"></div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="animate-on-scroll">
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
+                    Welcome to My Portfolio
+                </h1>
+                <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
+                    Please configure your profile in the admin panel to get started.
+                </p>
+                <a href="/admin/"
+                    class="bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-lg font-medium transition-colors">
+                    Go to Admin
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- About & Skills Section -->
+{% if skills_by_category %}
+<section id="about" class="py-20 bg-white dark:bg-gray-900 relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-5 dark:opacity-10">
+        <div class="absolute inset-0"
+            style="background-image: radial-gradient(circle at 1px 1px, rgba(59,130,246,0.3) 1px, transparent 0); background-size: 20px 20px;">
+        </div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center mb-16 animate-on-scroll">
+            <div
+                class="inline-flex items-center justify-center w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full mb-6">
+                <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z">
+                    </path>
+                </svg>
+            </div>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+                Skills & <span
+                    class="bg-gradient-to-r from-primary-600 to-blue-600 dark:from-primary-400 dark:to-blue-400 bg-clip-text text-transparent">Expertise</span>
+            </h2>
+            <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                A comprehensive overview of the technologies, frameworks, and tools I use to build innovative AI
+                solutions
+            </p>
+        </div>
+
+        <!-- Skills Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for category_name, skills in skills_by_category.items %}
+            <div
+                class="group animate-on-scroll bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-200 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-600">
+                <!-- Category Icon -->
+                <div class="flex items-center mb-6">
+                    <div
+                        class="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-xl flex items-center justify-center mr-4 group-hover:bg-primary-200 dark:group-hover:bg-primary-800 transition-colors duration-300">
+                        {% if 'Programming' in category_name %}
+                        <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                        </svg>
+                        {% elif 'AI' in category_name or 'ML' in category_name %}
+                        <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z">
+                            </path>
+                        </svg>
+                        {% elif 'Backend' in category_name or 'Data' in category_name %}
+                        <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4">
+                            </path>
+                        </svg>
+                        {% elif 'Cloud' in category_name or 'MLOps' in category_name %}
+                        <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10">
+                            </path>
+                        </svg>
+                        {% else %}
+                        <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z">
+                            </path>
+                        </svg>
+                        {% endif %}
+                    </div>
+                    <h3
+                        class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300">
+                        {{ category_name }}
+                    </h3>
+                </div>
+
+                <!-- Skills List -->
+                <div class="space-y-4">
+                    {% for skill in skills %}
+                    <div class="skill-item group/skill">
+                        <div class="flex justify-between items-center mb-2">
+                            <span
+                                class="text-gray-700 dark:text-gray-300 font-medium group-hover/skill:text-primary-600 dark:group-hover/skill:text-primary-400 transition-colors duration-200">
+                                {{ skill.name }}
+                            </span>
+                            <div class="flex items-center space-x-2">
+                                {% if skill.years_experience > 0 %}
+                                <span class="text-xs text-gray-500 dark:text-gray-400">
+                                    {{ skill.years_experience }}yr{{ skill.years_experience|pluralize }}
+                                </span>
+                                {% endif %}
+                                <span class="text-sm font-semibold px-2 py-1 rounded-full
+                                            {% if skill.proficiency == 'expert' %}
+                                                bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200
+                                            {% elif skill.proficiency == 'advanced' %}
+                                                bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200
+                                            {% elif skill.proficiency == 'intermediate' %}
+                                                bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200
+                                            {% else %}
+                                                bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200
+                                            {% endif %}">
+                                    {{ skill.get_proficiency_display }}
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Proficiency Bar -->
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
+                            <div class="h-full rounded-full transition-all duration-1000 ease-out skill-progress
+                                        {% if skill.proficiency == 'expert' %}
+                                            bg-gradient-to-r from-green-400 to-green-600 w-full
+                                        {% elif skill.proficiency == 'advanced' %}
+                                            bg-gradient-to-r from-blue-400 to-blue-600 w-4/5
+                                        {% elif skill.proficiency == 'intermediate' %}
+                                            bg-gradient-to-r from-yellow-400 to-yellow-600 w-3/5
+                                        {% else %}
+                                            bg-gradient-to-r from-gray-400 to-gray-600 w-2/5
+                                        {% endif %}"
+                                data-width="{% if skill.proficiency == 'expert' %}100{% elif skill.proficiency == 'advanced' %}80{% elif skill.proficiency == 'intermediate' %}60{% else %}40{% endif %}">
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Category Stats -->
+                <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                    <div class="flex justify-between text-sm text-gray-500 dark:text-gray-400">
+                        <span>{{ skills|length }} skill{{ skills|length|pluralize }}</span>
+                        <span>
+                            {% with expert_count=skills|length %}
+                            {% for skill in skills %}
+                            {% if skill.proficiency == 'expert' %}
+                            {% if forloop.first %}{% with expert_count=0 %}{% endwith %}{% endif %}
+                            {% endif %}
+                            {% endfor %}
+                            {% endwith %}
+                            Expertise Level:
+                            {% if skills %}
+                            {% with total_skills=skills|length expert_skills=0 advanced_skills=0 %}
+                            {% for skill in skills %}
+                            {% if skill.proficiency == 'expert' %}
+                            {% with expert_skills=expert_skills|add:1 %}{% endwith %}
+                            {% elif skill.proficiency == 'advanced' %}
+                            {% with advanced_skills=advanced_skills|add:1 %}{% endwith %}
+                            {% endif %}
+                            {% endfor %}
+                            <span class="font-semibold text-primary-600 dark:text-primary-400">High</span>
+                            {% endwith %}
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Additional Info Section -->
+        {% if profile %}
+        <div class="mt-20 text-center animate-on-scroll">
+            <div
+                class="bg-gradient-to-r from-primary-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-8 md:p-12 border border-primary-200 dark:border-gray-700">
+                <h3 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                    Ready to collaborate?
+                </h3>
+                <p class="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+                    I'm always interested in discussing new opportunities, innovative projects, and ways to leverage AI
+                    for meaningful impact.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#contact"
+                        class="inline-flex items-center justify-center px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
+                            </path>
+                        </svg>
+                        Start a Conversation
+                    </a>
+                    {% if profile.resume_file %}
+                    <a href="{{ profile.resume_file.url }}" target="_blank"
+                        download="{{ profile.full_name|slugify }}-resume.pdf"
+                        class="inline-flex items-center justify-center px-8 py-4 border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white font-medium rounded-xl transition-all duration-300 transform hover:scale-105"
+                        aria-label="Download {{ profile.full_name }}'s full resume">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                            </path>
+                        </svg>
+                        Download Resume
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endif %}
+
+<!-- Experience Section -->
+{% if experiences %}
+<section id="experience" class="py-20 bg-gray-50 dark:bg-gray-800 relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-5 dark:opacity-10">
+        <div class="absolute inset-0"
+            style="background-image: radial-gradient(circle at 1px 1px, rgba(59,130,246,0.3) 1px, transparent 0); background-size: 20px 20px;">
+        </div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center mb-16 animate-on-scroll">
+            <div
+                class="inline-flex items-center justify-center w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full mb-6">
+                <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6">
+                    </path>
+                </svg>
+            </div>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+                Professional <span
+                    class="bg-gradient-to-r from-primary-600 to-blue-600 dark:from-primary-400 dark:to-blue-400 bg-clip-text text-transparent">Experience</span>
+            </h2>
+            <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                My journey through the world of AI and software engineering
+            </p>
+        </div>
+
+        <!-- Experience Timeline -->
+        <div class="relative">
+            <!-- Timeline Line -->
+            <div class="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary-300 via-primary-400 to-primary-500 dark:from-primary-600 dark:via-primary-500 dark:to-primary-400"></div>
+
+            <div class="space-y-10 md:space-y-12">
+                {% for experience in experiences %}
+                <div class="relative animate-on-scroll group" style="animation-delay: {{ forloop.counter0|add:1|floatformat:1 }}s;"
+                     role="article" 
+                     aria-label="Experience at {{ experience.company }}">
+                    <!-- Timeline Dot -->
+                    <div class="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-8 w-4 h-4 bg-white dark:bg-gray-900 rounded-full border-2 border-primary-500 dark:border-primary-400 shadow-lg group-hover:scale-110 transition-transform duration-300 z-20"
+                         aria-hidden="true">
+                        {% if experience.is_current %}
+                        <div class="absolute inset-0 rounded-full bg-primary-500 dark:bg-primary-400 animate-pulse"
+                             title="Current Position"></div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Experience Card -->
+                    <div class="ml-12 {% if forloop.counter0|divisibleby:2 %}md:w-1/2 md:pr-8 md:ml-0{% else %}md:w-1/2 md:pl-8 md:ml-auto md:mr-0{% endif %}">
+                        <div class="bg-white dark:bg-gray-900 rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-200 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-600 group-hover:bg-gradient-to-br group-hover:from-white group-hover:to-primary-50 dark:group-hover:from-gray-900 dark:group-hover:to-gray-800">
+                            
+                            <!-- Header with improved layout -->
+                            <div class="mb-8">
+                                <!-- Position Title -->
+                                <h3 class="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-6 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300">
+                                    {{ experience.position }}
+                                </h3>
+                                
+                                <!-- Company Information -->
+                                <div class="mb-4">
+                                    <div class="flex items-center space-x-3 mb-3">
+                                        <div class="w-8 h-8 bg-primary-100 dark:bg-primary-900 rounded-md flex items-center justify-center">
+                                            <svg class="w-4 h-4 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-lg font-semibold text-primary-600 dark:text-primary-400">
+                                                {{ experience.company }}
+                                            </h4>
+                                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                                {{ experience.location }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Duration Information -->
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-2">
+                                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                            </svg>
+                                            <span class="text-sm text-gray-600 dark:text-gray-300">
+                                                {{ experience.start_date|date:"M Y" }} - 
+                                                {% if experience.is_current %}
+                                                    <span class="text-green-600 dark:text-green-400 font-semibold">Present</span>
+                                                {% else %}
+                                                    {{ experience.end_date|date:"M Y" }}
+                                                {% endif %}
+                                            </span>
+                                        </div>
+                                        <div class="bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 px-3 py-1 rounded-full text-xs font-medium">
+                                            {{ experience.duration }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Description -->
+                            <div class="mb-6">
+                                <p class="text-gray-700 dark:text-gray-300 leading-relaxed text-base">
+                                    {{ experience.description }}
+                                </p>
+                            </div>
+
+                            <!-- Achievements -->
+                            {% if experience.achievements %}
+                            <div class="mb-6">
+                                <button class="achievements-toggle w-full text-left mb-4 flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-lg p-0 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200"
+                                    aria-expanded="false"
+                                    aria-controls="achievements-{{ experience.id }}"
+                                    data-experience-id="{{ experience.id }}">
+                                    <div class="flex items-center">
+                                        <div class="w-6 h-6 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mr-2">
+                                            <svg class="w-3.5 h-3.5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </div>
+                                        <h4 class="text-base font-semibold text-gray-900 dark:text-white">
+                                            Key Achievements ({{ experience.achievements|length }})
+                                        </h4>
+                                    </div>
+                                    <svg class="w-5 h-5 text-gray-400 transform transition-transform duration-200 chevron-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <div id="achievements-{{ experience.id }}" class="achievements-content hidden overflow-hidden transition-all duration-300 ease-in-out">
+                                    <ul class="space-y-3">
+                                        {% for achievement in experience.achievements %}
+                                        <li class="flex items-start space-x-3 animate-on-scroll" style="animation-delay: {{ forloop.counter0|add:1|floatformat:1 }}s;">
+                                            <div class="flex-shrink-0 w-2 h-2 bg-primary-500 rounded-full mt-2"></div>
+                                            <span class="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">{{ achievement }}</span>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                            <!-- Technologies -->
+                            {% if experience.technologies.exists %}
+                            <div>
+                                <h4 class="text-base font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+                                    <div class="w-6 h-6 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-2">
+                                        <svg class="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                                        </svg>
+                                    </div>
+                                    Technologies Used
+                                </h4>
+                                <div class="flex flex-wrap gap-2">
+                                    {% for tech in experience.technologies.all %}
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 hover:bg-primary-200 dark:hover:bg-primary-800 transition-colors duration-200">
+                                        {{ tech.name }}
+                                    </span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- View All Experiences CTA -->
+        <div class="text-center mt-16 animate-on-scroll">
+            <div
+                class="bg-gradient-to-r from-primary-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-8 border border-primary-200 dark:border-gray-700">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                    Want to know more about my experience?
+                </h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
+                    Let's discuss how my background and expertise can contribute to your next project or team.
+                </p>
+                <a href="#contact"
+                    class="inline-flex items-center justify-center px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
+                        </path>
+                    </svg>
+                    Let's Connect
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Projects Section -->
+{% if projects %}
+<section id="projects" class="py-20 bg-white dark:bg-gray-900 relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-5 dark:opacity-10">
+        <div class="absolute inset-0"
+            style="background-image: radial-gradient(circle at 1px 1px, rgba(59,130,246,0.3) 1px, transparent 0); background-size: 20px 20px;">
+        </div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center mb-16 animate-on-scroll">
+            <div
+                class="inline-flex items-center justify-center w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full mb-6">
+                <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                    </path>
+                </svg>
+            </div>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+                Featured <span
+                    class="bg-gradient-to-r from-primary-600 to-blue-600 dark:from-primary-400 dark:to-blue-400 bg-clip-text text-transparent">Projects</span>
+            </h2>
+            <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                A showcase of my latest work in AI, machine learning, and software development
+            </p>
+        </div>
+
+        <!-- Technology Filter -->
+        <div class="mb-12 animate-on-scroll">
+            <div class="flex flex-wrap justify-center gap-3">
+                <button class="filter-btn active" data-filter="all" 
+                    aria-label="Show all projects"
+                    class="px-4 py-2 rounded-full text-sm font-medium bg-primary-600 text-white hover:bg-primary-700 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
+                    All Projects
+                </button>
+                {% regroup projects by technologies.all as projects_by_tech %}
+                {% for tech_group in projects_by_tech %}
+                    {% for tech in tech_group.list.0.technologies.all %}
+                        <button class="filter-btn" data-filter="{{ tech.name|slugify }}"
+                            aria-label="Filter projects by {{ tech.name }}"
+                            class="px-4 py-2 rounded-full text-sm font-medium bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
+                            {{ tech.name }}
+                        </button>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Projects Grid -->
+        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for project in projects %}
+            <div class="project-card group animate-on-scroll bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-gray-200 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-600 flex flex-col h-full"
+                style="animation-delay: {{ forloop.counter0|add:1|floatformat:1 }}s;"
+                data-technologies="{% for tech in project.technologies.all %}{{ tech.name|slugify }} {% endfor %}"
+                data-project-id="{{ project.id }}"
+                role="article"
+                aria-label="Project: {{ project.title }}">
+                <!-- Project Image -->
+                <div
+                    class="relative overflow-hidden bg-gradient-to-br from-primary-50 to-blue-50 dark:from-gray-700 dark:to-gray-800 h-48">
+                    {% if project.image %}
+                    <img src="{{ project.image.url }}" alt="Screenshot of {{ project.title }} project"
+                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        loading="lazy"
+                        decoding="async">
+                    {% else %}
+                    <!-- Placeholder for projects without images -->
+                    <div class="w-full h-full flex items-center justify-center">
+                        <svg class="w-16 h-16 text-primary-400 dark:text-primary-500" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                            </path>
+                        </svg>
+                    </div>
+                    {% endif %}
+
+                    <!-- Overlay with links -->
+                    <div
+                        class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-60 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        <div class="flex space-x-4">
+                            {% if project.github_url %}
+                            <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer"
+                                class="bg-white dark:bg-gray-800 text-gray-900 dark:text-white p-3 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 transform hover:scale-110"
+                                aria-label="View {{ project.title }} on GitHub">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                </svg>
+                            </a>
+                            {% endif %}
+
+                            {% if project.demo_url %}
+                            <a href="{{ project.demo_url }}" target="_blank" rel="noopener noreferrer"
+                                class="bg-primary-600 hover:bg-primary-700 text-white p-3 rounded-full transition-colors duration-200 transform hover:scale-110"
+                                aria-label="View {{ project.title }} live demo">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14">
+                                    </path>
+                                </svg>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Content -->
+                <div class="p-6 flex flex-col flex-grow">
+                    <!-- Project Title -->
+                    <h3
+                        class="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300">
+                        {{ project.title }}
+                    </h3>
+
+                    <!-- Project Description -->
+                    <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                        {{ project.description }}
+                    </p>
+
+                    <!-- Technologies -->
+                    {% if project.technologies.exists %}
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        {% for tech in project.technologies.all %}
+                        <span
+                            class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 hover:bg-primary-200 dark:hover:bg-primary-800 transition-colors duration-200">
+                            {{ tech.name }}
+                        </span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <!-- Spacer to push footer to bottom -->
+                    <div class="flex-grow"></div>
+
+                    <!-- Project Footer -->
+                    <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <!-- Project Links -->
+                        <div class="flex flex-wrap gap-3 mb-3">
+                            {% if project.github_url %}
+                            <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer"
+                                class="inline-flex items-center text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-200"
+                                aria-label="View {{ project.title }} source code on GitHub">
+                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path
+                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                </svg>
+                                GitHub
+                            </a>
+                            {% endif %}
+
+                            {% if project.demo_url %}
+                            <a href="{{ project.demo_url }}" target="_blank" rel="noopener noreferrer"
+                                class="inline-flex items-center text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-200"
+                                aria-label="View {{ project.title }} live demo">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14">
+                                    </path>
+                                </svg>
+                                Live Demo
+                            </a>
+                            {% endif %}
+
+                            {% if project.detailed_description %}
+                            <button class="view-more-btn inline-flex items-center text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-200"
+                                data-project-id="{{ project.id }}"
+                                aria-label="View more details about {{ project.title }}">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                    </path>
+                                </svg>
+                                View More
+                            </button>
+                            {% endif %}
+                        </div>
+
+                        <!-- Project Date -->
+                        <div class="flex justify-end">
+                            <span class="text-xs text-gray-500 dark:text-gray-400">
+                                {{ project.created_date|date:"M Y" }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Hidden detailed description for modal -->
+                    {% if project.detailed_description %}
+                    <div class="project-details hidden" data-project-id="{{ project.id }}">
+                        <div class="project-title">{{ project.title }}</div>
+                        <div class="project-description">{{ project.detailed_description }}</div>
+                        <div class="project-image">{% if project.image %}{{ project.image.url }}{% endif %}</div>
+                        <div class="project-github">{% if project.github_url %}{{ project.github_url }}{% endif %}</div>
+                        <div class="project-demo">{% if project.demo_url %}{{ project.demo_url }}{% endif %}</div>
+                        <div class="project-technologies">
+                            {% for tech in project.technologies.all %}{{ tech.name }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                        </div>
+                        <div class="project-date">{{ project.created_date|date:"F Y" }}</div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- View All Projects CTA -->
+        <div class="text-center mt-16 animate-on-scroll">
+            <div
+                class="bg-gradient-to-r from-primary-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-8 border border-primary-200 dark:border-gray-700">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                    Interested in my work?
+                </h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
+                    Explore more of my projects and see how I can help bring your ideas to life with cutting-edge AI and
+                    software solutions.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#contact"
+                        class="inline-flex items-center justify-center px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
+                            </path>
+                        </svg>
+                        Let's Collaborate
+                    </a>
+                    {% if profile and profile.github_url %}
+                    <a href="{{ profile.github_url }}" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center justify-center px-8 py-4 border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white font-medium rounded-xl transition-all duration-300 transform hover:scale-105">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg>
+                        View All Projects
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Project Modal -->
+<div id="project-modal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <!-- Background overlay -->
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" id="modal-backdrop"></div>
+
+        <!-- Modal panel -->
+        <div class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full">
+            <!-- Modal header -->
+            <div class="bg-white dark:bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div class="flex items-start justify-between">
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2" id="modal-title">
+                            Project Title
+                        </h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400" id="modal-date">
+                            Project Date
+                        </p>
+                    </div>
+                    <button type="button" class="bg-white dark:bg-gray-800 rounded-md text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-500" id="close-modal" aria-label="Close modal">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Modal content -->
+            <div class="bg-white dark:bg-gray-800 px-4 pb-4 sm:p-6 sm:pt-0">
+                <!-- Project image -->
+                <div class="mb-6" id="modal-image-container">
+                    <img id="modal-image" src="" alt="" class="w-full h-64 object-cover rounded-lg">
+                </div>
+
+                <!-- Project description -->
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">About This Project</h4>
+                    <div id="modal-description" class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                        Project description will appear here
+                    </div>
+                </div>
+
+                <!-- Technologies used -->
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Technologies Used</h4>
+                    <div id="modal-technologies" class="flex flex-wrap gap-2">
+                        <!-- Technology tags will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Project links -->
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a id="modal-github-link" href="#" target="_blank" rel="noopener noreferrer" class="hidden inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg>
+                        View on GitHub
+                    </a>
+                    <a id="modal-demo-link" href="#" target="_blank" rel="noopener noreferrer" class="hidden inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        </svg>
+                        View Live Demo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Contact Section -->
+<section id="contact" class="py-20 bg-gray-50 dark:bg-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Get In Touch
+            </h2>
+            <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                Let's discuss opportunities or collaborations
+            </p>
+        </div>
+
+        <div class="max-w-2xl mx-auto">
+            <form id="contact-form" method="post" action="{% url 'portfolio:contact' %}" class="space-y-6">
+                {% csrf_token %}
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="id_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Name
+                        </label>
+                        <input type="text" name="name" id="id_name" required class="form-input" placeholder="Your Name">
+                    </div>
+
+                    <div>
+                        <label for="id_email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Email
+                        </label>
+                        <input type="email" name="email" id="id_email" required class="form-input"
+                            placeholder="your.email@example.com">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="id_subject" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Subject
+                    </label>
+                    <input type="text" name="subject" id="id_subject" required class="form-input" placeholder="Subject">
+                </div>
+
+                <div>
+                    <label for="id_message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Message
+                    </label>
+                    <textarea name="message" id="id_message" rows="5" required class="form-textarea"
+                        placeholder="Your message..."></textarea>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit"
+                        class="bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-lg font-medium transition-colors">
+                        Send Message
+                    </button>
+                </div>
+            </form>
+
+            <div id="form-messages" class="mt-4"></div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Contact form handling
+    document.getElementById('contact-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const form = this;
+        const formData = new FormData(form);
+        const messagesDiv = document.getElementById('form-messages');
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    messagesDiv.innerHTML = `
+                    <div class="bg-green-100 dark:bg-green-900 border border-green-400 dark:border-green-600 text-green-700 dark:text-green-300 px-4 py-3 rounded">
+                        ${data.message}
+                    </div>
+                `;
+                    form.reset();
+                } else {
+                    let errorHtml = '<div class="bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-300 px-4 py-3 rounded"><ul>';
+                    for (const [field, errors] of Object.entries(data.errors)) {
+                        errors.forEach(error => {
+                            errorHtml += `<li>${error}</li>`;
+                        });
+                    }
+                    errorHtml += '</ul></div>';
+                    messagesDiv.innerHTML = errorHtml;
+                }
+            })
+            .catch(error => {
+                messagesDiv.innerHTML = `
+                <div class="bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-300 px-4 py-3 rounded">
+                    An error occurred. Please try again.
+                </div>
+            `;
+            });
+    });
+</script>
+{% endblock %}
