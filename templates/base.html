@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +15,14 @@
     <meta property="og:description" content="{% block og_description %}Professional AI Engineer Portfolio{% endblock %}">
     <meta property="og:type" content="website">
     
+    <!-- Accessibility Meta Tags -->
+    <meta name="theme-color" content="#3B82F6">
+    <meta name="color-scheme" content="light dark">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="{% static 'css/output.css' %}" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
+    
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{% load static %}{% static 'favicon.ico' %}">
     
@@ -26,10 +34,48 @@
     <!-- Tailwind CSS -->
     {% load static %}
     <link href="{% static 'css/output.css' %}" rel="stylesheet">
+    <link href="{% static 'css/accessibility.css' %}" rel="stylesheet">
     
     {% block extra_css %}{% endblock %}
+    
+    <!-- Skip to main content link for screen readers -->
+    <style>
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: #3B82F6;
+            color: white;
+            padding: 8px;
+            text-decoration: none;
+            border-radius: 4px;
+            z-index: 1000;
+            transition: top 0.3s;
+        }
+        .skip-link:focus {
+            top: 6px;
+        }
+        
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            .nav-link, .mobile-nav-link {
+                border: 1px solid currentColor;
+            }
+        }
+        
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
 </head>
 <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
+    <!-- Skip to main content link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <!-- Navigation -->
     <nav class="fixed top-0 w-full glass-effect z-50 border-b border-gray-200 dark:border-gray-700" role="navigation" aria-label="Main navigation">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -98,15 +144,20 @@
     </nav>
     
     <!-- Main Content -->
-    <main class="pt-16">
+    <main id="main-content" class="pt-16" role="main" tabindex="-1">
         {% block content %}{% endblock %}
     </main>
     
     <!-- Footer -->
-    <footer class="bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+    <footer class="bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700" role="contentinfo">
         <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
             <div class="text-center text-gray-600 dark:text-gray-400">
                 <p>&copy; {% now "Y" %} AI Engineer Portfolio. Built with Django & Tailwind CSS.</p>
+                <p class="mt-2 text-sm">
+                    <a href="#main-content" class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 focus:outline-none focus:underline">
+                        Back to top
+                    </a>
+                </p>
             </div>
         </div>
     </footer>

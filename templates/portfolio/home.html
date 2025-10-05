@@ -1309,7 +1309,7 @@ Engineer Portfolio{% endif %}
             from_email: formData.get('email'),
             subject: formData.get('subject'),
             message: formData.get('message'),
-            to_email: '{{ emailjs_to_email|default:"ahmadnouh428@gmail.com" }}'
+            to_email: '{{ emailjs_to_email|default:"johndoe@gmail.com" }}'
         };
 
         // Send email using EmailJS with environment variables
@@ -1359,7 +1359,7 @@ Engineer Portfolio{% endif %}
                 console.log('FAILED...', error);
                 
                 // Show error message
-                let errorMessage = 'Failed to send message. Please try again or contact me directly at {{ emailjs_to_email|default:"ahmadnouh428@gmail.com" }}';
+                let errorMessage = 'Failed to send message. Please try again or contact me directly at {{ emailjs_to_email|default:"johndoe@gmail.com" }}';
                 if (error && error.message) {
                     errorMessage = error.message;
                 }

@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Error - AI Engineer Portfolio</title>
+    <meta name="description" content="A server error occurred. We're working to fix this issue.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <link href="{% static 'css/output.css' %}" rel="stylesheet">
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+    <section class="min-h-screen flex items-center justify-center bg-gradient-to-br from-red-50 to-orange-100 dark:from-gray-900 dark:to-gray-800">
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <!-- Error Icon -->
+            <div class="mb-8">
+                <div class="inline-flex items-center justify-center w-24 h-24 bg-red-100 dark:bg-red-900 rounded-full mb-6">
+                    <svg class="w-12 h-12 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Error Message -->
+            <h1 class="text-6xl md:text-8xl font-bold text-red-600 dark:text-red-400 mb-4" aria-label="Error 500">
+                500
+            </h1>
+            
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-6">
+                Server Error
+            </h2>
+            
+            <p class="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-lg mx-auto leading-relaxed">
+                Something went wrong on our end. We've been notified and are working to fix this issue. Please try again in a few moments.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="/" 
+                   class="inline-flex items-center justify-center px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-medium rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                   aria-label="Return to homepage">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                    </svg>
+                    Go Home
+                </a>
+                
+                <button onclick="window.location.reload()" 
+                        class="inline-flex items-center justify-center px-8 py-4 border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white font-medium rounded-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                        aria-label="Refresh the page">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                    </svg>
+                    Try Again
+                </button>
+            </div>
+
+            <!-- Error ID for Support -->
+            <div class="mt-12 p-6 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                    Need Help?
+                </h3>
+                <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+                    If this problem persists, please contact support with the following information:
+                </p>
+                <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-3">
+                    <code class="text-sm text-gray-800 dark:text-gray-200">
+                        Error ID: {{ request.META.HTTP_X_REQUEST_ID|default:"N/A" }}
+                        <br>
+                        Time: {% now "Y-m-d H:i:s T" %}
+                    </code>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+    // Add keyboard navigation for error page
+    document.addEventListener('DOMContentLoaded', function() {
+        // Focus management for better accessibility
+        const mainContent = document.querySelector('section');
+        if (mainContent) {
+            mainContent.setAttribute('tabindex', '-1');
+            mainContent.focus();
+        }
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Press 'h' to go home
+            if (e.key === 'h' || e.key === 'H') {
+                window.location.href = "/";
+            }
+            // Press 'r' to refresh
+            if (e.key === 'r' || e.key === 'R') {
+                window.location.reload();
+            }
+        });
+    });
+    </script>
+</body>
+</html>

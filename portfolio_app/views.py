@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_protect
 from django.core.mail import send_mail
 from django.conf import settings
@@ -8,8 +8,12 @@ from django.utils import timezone
 from django.core.cache import cache
 from datetime import timedelta
 import re
+import logging
 from .models import Profile, Skill, Experience, Project, ContactMessage
 from .forms import ContactForm
+
+# Get logger for this module
+logger = logging.getLogger(__name__)
 
 
 def get_client_ip(request):
@@ -99,24 +103,36 @@ def has_honeypot_content(request):
 
 
 def home(request):
-    """Main portfolio homepage"""
+    """Main portfolio homepage with error handling and logging"""
     try:
         profile = Profile.objects.first()
+        logger.info(f"Portfolio homepage accessed by {get_client_ip(request)}")
     except Profile.DoesNotExist:
         profile = None
+        logger.warning("No profile found in database")
+    except Exception as e:
+        logger.error(f"Error fetching profile: {str(e)}")
+        profile = None
     
-    # Get featured skills by category
-    skills_by_category = {}
-    for category, display_name in Skill.CATEGORY_CHOICES:
-        skills = Skill.objects.filter(category=category, is_featured=True)
-        if skills.exists():
-            skills_by_category[display_name] = skills
-    
-    # Get recent experiences (limit to 3)
-    experiences = Experience.objects.select_related('profile').prefetch_related('technologies')[:3]
-    
-    # Get featured projects (limit to 6)
-    projects = Project.objects.filter(is_featured=True).prefetch_related('technologies')[:6]
+    try:
+        # Get featured skills by category
+        skills_by_category = {}
+        for category, display_name in Skill.CATEGORY_CHOICES:
+            skills = Skill.objects.filter(category=category, is_featured=True)
+            if skills.exists():
+                skills_by_category[display_name] = skills
+        
+        # Get recent experiences (limit to 3)
+        experiences = Experience.objects.select_related('profile').prefetch_related('technologies')[:3]
+        
+        # Get featured projects (limit to 6)
+        projects = Project.objects.filter(is_featured=True).prefetch_related('technologies')[:6]
+        
+    except Exception as e:
+        logger.error(f"Error fetching portfolio data: {str(e)}")
+        skills_by_category = {}
+        experiences = []
+        projects = []
     
     context = {
         'profile': profile,
@@ -210,3 +226,32 @@ def contact(request):
         form = ContactForm()
     
     return render(request, 'portfolio/contact.html', {'form': form})
+
+
+def custom_404(request, exception):
+    """Custom 404 error handler with logging"""
+    logger.warning(f"404 error for URL: {request.path} from IP: {get_client_ip(request)}")
+    return render(request, '404.html', status=404)
+
+
+def custom_500(request):
+    """Custom 500 error handler with logging"""
+    logger.error(f"500 error for URL: {request.path} from IP: {get_client_ip(request)}")
+    return render(request, '500.html', status=500)
+
+
+def health_check(request):
+    """Health check endpoint for Docker and load balancers"""
+    try:
+        # Basic database connectivity check
+        from django.db import connection
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT 1")
+        
+        # Check if we can access the Profile model
+        Profile.objects.exists()
+        
+        return HttpResponse("OK", status=200, content_type="text/plain")
+    except Exception as e:
+        logger.error(f"Health check failed: {str(e)}")
+        return HttpResponse("FAIL", status=503, content_type="text/plain")

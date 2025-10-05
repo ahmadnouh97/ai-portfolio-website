@@ -40,7 +40,7 @@ class SkillAdmin(admin.ModelAdmin):
     list_display = ['name', 'category', 'proficiency', 'years_experience', 'is_featured', 'order']
     list_filter = ['category', 'proficiency', 'is_featured']
     list_editable = ['proficiency', 'years_experience', 'is_featured', 'order']
-    search_fields = ['name']
+    search_fields = ['name', 'category']
     ordering = ['category', 'order', 'name']
     
     fieldsets = [
@@ -91,13 +91,12 @@ class ExperienceAdmin(admin.ModelAdmin):
         if Profile.objects.count() == 1:
             form.base_fields['profile'].initial = Profile.objects.first()
         return form
-
-
-class ProjectTechnologyInline(admin.TabularInline):
-    model = Project.technologies.through
-    extra = 1
-    verbose_name = "Technology"
-    verbose_name_plural = "Technologies Used"
+    
+    # Optimize technologies queryset
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        if db_field.name == "technologies":
+            kwargs["queryset"] = Skill.objects.all().order_by('category', 'name')
+        return super().formfield_for_manytomany(db_field, request, **kwargs)
 
 
 @admin.register(Project)
@@ -115,12 +114,26 @@ class ProjectAdmin(admin.ModelAdmin):
         ('Media & Links', {
             'fields': ['image', 'github_url', 'demo_url']
         }),
+        ('Technologies', {
+            'fields': ['technologies']
+        }),
         ('Metadata', {
             'fields': ['created_date', 'is_featured', 'order']
         }),
     ]
     
+    # Use filter_horizontal for better compatibility
     filter_horizontal = ['technologies']
+    
+    # Optimize database queries
+    def get_queryset(self, request):
+        return super().get_queryset(request).select_related('profile').prefetch_related('technologies')
+    
+    # Limit the number of technologies shown in the widget
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        if db_field.name == "technologies":
+            kwargs["queryset"] = Skill.objects.all().order_by('category', 'name')
+        return super().formfield_for_manytomany(db_field, request, **kwargs)
     
     def has_github(self, obj):
         return bool(obj.github_url)

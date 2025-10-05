@@ -58,7 +58,7 @@ Add your EmailJS credentials to your `.env` file:
 EMAILJS_PUBLIC_KEY=your-actual-public-key-from-step-4
 EMAILJS_SERVICE_ID=your-actual-service-id-from-step-2
 EMAILJS_TEMPLATE_ID=your-actual-template-id-from-step-3
-EMAILJS_TO_EMAIL=ahmadnouh428@gmail.com
+EMAILJS_TO_EMAIL=johndoe@gmail.com
 ```
 
 The code will automatically use these environment variables - no need to modify the template files!
@@ -79,7 +79,7 @@ Here's what your `.env` file should look like after setup:
 EMAILJS_PUBLIC_KEY=user_abc123def456
 EMAILJS_SERVICE_ID=service_gmail_xyz
 EMAILJS_TEMPLATE_ID=template_contact_123
-EMAILJS_TO_EMAIL=ahmadnouh428@gmail.com
+EMAILJS_TO_EMAIL=johndoe@gmail.com
 ```
 
 The application will automatically use these values - no code changes needed!

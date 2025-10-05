@@ -628,6 +628,323 @@ class ExperienceInteractions {
     }
 }
 
+// Accessibility Manager
+class AccessibilityManager {
+    constructor() {
+        this.init();
+    }
+    
+    init() {
+        this.setupKeyboardNavigation();
+        this.setupFocusManagement();
+        this.setupScreenReaderSupport();
+        this.setupReducedMotionSupport();
+        this.setupHighContrastSupport();
+    }
+    
+    setupKeyboardNavigation() {
+        // Add keyboard navigation for interactive elements
+        document.addEventListener('keydown', (e) => {
+            // Skip to main content with Ctrl+/
+            if (e.ctrlKey && e.key === '/') {
+                e.preventDefault();
+                const mainContent = document.getElementById('main-content');
+                if (mainContent) {
+                    mainContent.focus();
+                    mainContent.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+            
+            // Theme toggle with Ctrl+Shift+T
+            if (e.ctrlKey && e.shiftKey && e.key === 'T') {
+                e.preventDefault();
+                const themeToggle = document.getElementById('theme-toggle');
+                if (themeToggle) {
+                    themeToggle.click();
+                }
+            }
+            
+            // Navigate sections with arrow keys when focused on navigation
+            if (document.activeElement && document.activeElement.classList.contains('nav-link')) {
+                const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+                const currentIndex = navLinks.indexOf(document.activeElement);
+                
+                if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    const nextIndex = (currentIndex + 1) % navLinks.length;
+                    navLinks[nextIndex].focus();
+                } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    const prevIndex = (currentIndex - 1 + navLinks.length) % navLinks.length;
+                    navLinks[prevIndex].focus();
+                }
+            }
+        });
+        
+        // Add Enter key support for clickable elements
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && e.target.classList.contains('clickable')) {
+                e.target.click();
+            }
+        });
+    }
+    
+    setupFocusManagement() {
+        // Ensure focus is visible
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                document.body.classList.add('keyboard-navigation');
+            }
+        });
+        
+        document.addEventListener('mousedown', () => {
+            document.body.classList.remove('keyboard-navigation');
+        });
+        
+        // Focus trap for modals
+        this.setupFocusTrap();
+    }
+    
+    setupFocusTrap() {
+        const modal = document.getElementById('project-modal');
+        if (!modal) return;
+        
+        const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+        
+        modal.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                const focusableContent = modal.querySelectorAll(focusableElements);
+                const firstFocusableElement = focusableContent[0];
+                const lastFocusableElement = focusableContent[focusableContent.length - 1];
+                
+                if (e.shiftKey) {
+                    if (document.activeElement === firstFocusableElement) {
+                        lastFocusableElement.focus();
+                        e.preventDefault();
+                    }
+                } else {
+                    if (document.activeElement === lastFocusableElement) {
+                        firstFocusableElement.focus();
+                        e.preventDefault();
+                    }
+                }
+            }
+        });
+    }
+    
+    setupScreenReaderSupport() {
+        // Announce dynamic content changes
+        this.createLiveRegion();
+        
+        // Add screen reader only text for context
+        this.addScreenReaderContext();
+    }
+    
+    createLiveRegion() {
+        const liveRegion = document.createElement('div');
+        liveRegion.id = 'live-region';
+        liveRegion.setAttribute('aria-live', 'polite');
+        liveRegion.setAttribute('aria-atomic', 'true');
+        liveRegion.className = 'sr-only';
+        document.body.appendChild(liveRegion);
+        
+        // Function to announce messages
+        window.announceToScreenReader = (message) => {
+            liveRegion.textContent = message;
+            setTimeout(() => {
+                liveRegion.textContent = '';
+            }, 1000);
+        };
+    }
+    
+    addScreenReaderContext() {
+        // Add context for skill progress bars
+        const skillBars = document.querySelectorAll('.skill-progress');
+        skillBars.forEach(bar => {
+            const skillItem = bar.closest('.skill-item');
+            const skillName = skillItem.querySelector('span').textContent;
+            const proficiency = skillItem.querySelector('.text-sm').textContent;
+            
+            bar.setAttribute('role', 'progressbar');
+            bar.setAttribute('aria-label', `${skillName} proficiency: ${proficiency}`);
+            
+            // Set aria-valuenow based on proficiency
+            let value = 0;
+            if (bar.classList.contains('w-full')) value = 100;
+            else if (bar.classList.contains('w-4/5')) value = 80;
+            else if (bar.classList.contains('w-3/5')) value = 60;
+            else if (bar.classList.contains('w-2/5')) value = 40;
+            
+            bar.setAttribute('aria-valuenow', value);
+            bar.setAttribute('aria-valuemin', '0');
+            bar.setAttribute('aria-valuemax', '100');
+        });
+    }
+    
+    setupReducedMotionSupport() {
+        // Check for reduced motion preference
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        
+        if (prefersReducedMotion) {
+            // Disable animations
+            document.documentElement.style.setProperty('--animation-duration', '0.01ms');
+            document.documentElement.style.setProperty('--transition-duration', '0.01ms');
+            
+            // Remove animation classes
+            const animatedElements = document.querySelectorAll('.animate-on-scroll, .animate-blob, .animate-bounce');
+            animatedElements.forEach(el => {
+                el.style.animation = 'none';
+                el.style.transition = 'none';
+            });
+        }
+    }
+    
+    setupHighContrastSupport() {
+        // Detect high contrast mode
+        const supportsHighContrast = window.matchMedia('(prefers-contrast: high)').matches;
+        
+        if (supportsHighContrast) {
+            document.documentElement.classList.add('high-contrast');
+        }
+        
+        // Listen for changes
+        window.matchMedia('(prefers-contrast: high)').addEventListener('change', (e) => {
+            if (e.matches) {
+                document.documentElement.classList.add('high-contrast');
+            } else {
+                document.documentElement.classList.remove('high-contrast');
+            }
+        });
+    }
+}
+
+// Error Handling Manager
+class ErrorManager {
+    constructor() {
+        this.init();
+    }
+    
+    init() {
+        this.setupGlobalErrorHandling();
+        this.setupFormErrorHandling();
+        this.setupImageErrorHandling();
+    }
+    
+    setupGlobalErrorHandling() {
+        // Handle JavaScript errors gracefully
+        window.addEventListener('error', (e) => {
+            console.error('JavaScript error:', e.error);
+            this.showUserFriendlyError('Something went wrong. Please refresh the page.');
+        });
+        
+        // Handle unhandled promise rejections
+        window.addEventListener('unhandledrejection', (e) => {
+            console.error('Unhandled promise rejection:', e.reason);
+            this.showUserFriendlyError('A network error occurred. Please check your connection.');
+        });
+    }
+    
+    setupFormErrorHandling() {
+        // Enhanced form validation and error display
+        const forms = document.querySelectorAll('form');
+        forms.forEach(form => {
+            form.addEventListener('submit', (e) => {
+                if (!this.validateForm(form)) {
+                    e.preventDefault();
+                }
+            });
+        });
+    }
+    
+    setupImageErrorHandling() {
+        // Handle broken images gracefully
+        const images = document.querySelectorAll('img');
+        images.forEach(img => {
+            img.addEventListener('error', () => {
+                img.style.display = 'none';
+                
+                // Create placeholder
+                const placeholder = document.createElement('div');
+                placeholder.className = 'bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center';
+                placeholder.style.width = img.style.width || '100px';
+                placeholder.style.height = img.style.height || '100px';
+                placeholder.innerHTML = `
+                    <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                `;
+                
+                img.parentNode.insertBefore(placeholder, img);
+            });
+        });
+    }
+    
+    validateForm(form) {
+        let isValid = true;
+        const requiredFields = form.querySelectorAll('[required]');
+        
+        requiredFields.forEach(field => {
+            if (!field.value.trim()) {
+                this.showFieldError(field, 'This field is required');
+                isValid = false;
+            } else {
+                this.clearFieldError(field);
+            }
+        });
+        
+        return isValid;
+    }
+    
+    showFieldError(field, message) {
+        field.classList.add('border-red-500');
+        field.setAttribute('aria-invalid', 'true');
+        
+        let errorElement = field.parentNode.querySelector('.field-error');
+        if (!errorElement) {
+            errorElement = document.createElement('div');
+            errorElement.className = 'field-error text-red-500 text-sm mt-1';
+            errorElement.setAttribute('role', 'alert');
+            field.parentNode.appendChild(errorElement);
+        }
+        errorElement.textContent = message;
+    }
+    
+    clearFieldError(field) {
+        field.classList.remove('border-red-500');
+        field.removeAttribute('aria-invalid');
+        
+        const errorElement = field.parentNode.querySelector('.field-error');
+        if (errorElement) {
+            errorElement.remove();
+        }
+    }
+    
+    showUserFriendlyError(message) {
+        // Create or update error notification
+        let errorNotification = document.getElementById('error-notification');
+        if (!errorNotification) {
+            errorNotification = document.createElement('div');
+            errorNotification.id = 'error-notification';
+            errorNotification.className = 'fixed top-20 right-4 bg-red-500 text-white px-6 py-4 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300';
+            errorNotification.setAttribute('role', 'alert');
+            document.body.appendChild(errorNotification);
+        }
+        
+        errorNotification.textContent = message;
+        errorNotification.style.transform = 'translateX(0)';
+        
+        // Auto-hide after 5 seconds
+        setTimeout(() => {
+            errorNotification.style.transform = 'translateX(full)';
+        }, 5000);
+        
+        // Announce to screen readers
+        if (window.announceToScreenReader) {
+            window.announceToScreenReader(message);
+        }
+    }
+}
+
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new ThemeManager();
@@ -638,6 +955,8 @@ document.addEventListener('DOMContentLoaded', () => {
     new SkillsInteractions();
     new ProjectsManager();
     new ExperienceInteractions();
+    new AccessibilityManager();
+    new ErrorManager();
 });
 
 // Utility functions
