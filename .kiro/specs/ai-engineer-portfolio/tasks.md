@@ -83,21 +83,14 @@
   - Include success/error message handling
   - _Requirements: 5.1, 5.2, 5.3, 8.1_
 
-- [ ] 6. Add SEO optimization and performance features
-  - Implement meta tags, Open Graph tags, and structured data
-  - Add image lazy loading and optimization
-  - Configure caching and performance optimization
-  - Create SEO-friendly URLs and sitemap
-  - _Requirements: 7.1, 7.3, 10.1, 10.2, 10.4_
-
-- [ ] 7. Ensure accessibility and create error handling
+- [ ] 6. Ensure accessibility and create error handling
   - Add ARIA labels, semantic HTML, and keyboard navigation
   - Create custom 404/500 error pages
   - Implement proper logging and error handling
   - Ensure WCAG 2.1 compliance
   - _Requirements: 7.5, 8.3, 9.4_
 
-- [ ] 8. Create Dockerfile for deployment
+- [ ] 7. Create Dockerfile for deployment
   - Create multi-stage Dockerfile for production deployment
   - Configure static file collection and serving
   - Set up proper environment variable handling
@@ -111,3 +104,10 @@
   - Populate initial data based on resume information
   - Add final polish and cross-browser testing
   - _Requirements: 3.1, 8.4_
+
+- [ ] 10. Add SEO optimization and performance features
+  - Implement meta tags, Open Graph tags, and structured data
+  - Add image lazy loading and optimization
+  - Configure caching and performance optimization
+  - Create SEO-friendly URLs and sitemap
+  - _Requirements: 7.1, 7.3, 10.1, 10.2, 10.4_
