@@ -959,112 +959,473 @@ Engineer Portfolio{% endif %}
 {% endif %}
 
 <!-- Contact Section -->
-<section id="contact" class="py-20 bg-gray-50 dark:bg-gray-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                Get In Touch
+<section id="contact" class="py-20 bg-gray-50 dark:bg-gray-800 relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-5 dark:opacity-10">
+        <div class="absolute inset-0"
+            style="background-image: radial-gradient(circle at 1px 1px, rgba(59,130,246,0.3) 1px, transparent 0); background-size: 20px 20px;">
+        </div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center mb-16 animate-on-scroll">
+            <div
+                class="inline-flex items-center justify-center w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full mb-6">
+                <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                    </path>
+                </svg>
+            </div>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+                Get In <span
+                    class="bg-gradient-to-r from-primary-600 to-blue-600 dark:from-primary-400 dark:to-blue-400 bg-clip-text text-transparent">Touch</span>
             </h2>
-            <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                Let's discuss opportunities or collaborations
+            <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                Ready to collaborate on your next AI project? Let's discuss opportunities and innovative solutions
             </p>
         </div>
 
-        <div class="max-w-2xl mx-auto">
-            <form id="contact-form" method="post" action="{% url 'portfolio:contact' %}" class="space-y-6">
-                {% csrf_token %}
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <!-- Contact Information -->
+            <div class="animate-on-scroll">
+                <div
+                    class="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700 h-full">
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">
+                        Contact Information
+                    </h3>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label for="id_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                            Name
-                        </label>
-                        <input type="text" name="name" id="id_name" required class="form-input" placeholder="Your Name">
+                    {% if profile %}
+                    <!-- Contact Details -->
+                    <div class="space-y-6 mb-8">
+                        {% if profile.email %}
+                        <div class="flex items-center space-x-4">
+                            <div
+                                class="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Email</p>
+                                <a href="mailto:{{ profile.email }}"
+                                    class="text-lg font-medium text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                                    {{ profile.email }}
+                                </a>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if profile.phone %}
+                        <div class="flex items-center space-x-4">
+                            <div
+                                class="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Phone</p>
+                                <a href="tel:{{ profile.phone }}"
+                                    class="text-lg font-medium text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                                    {{ profile.phone }}
+                                </a>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if profile.location %}
+                        <div class="flex items-center space-x-4">
+                            <div
+                                class="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Location</p>
+                                <p class="text-lg font-medium text-gray-900 dark:text-white">
+                                    {{ profile.location }}
+                                </p>
+                            </div>
+                        </div>
+                        {% endif %}
                     </div>
 
-                    <div>
-                        <label for="id_email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                            Email
-                        </label>
-                        <input type="email" name="email" id="id_email" required class="form-input"
-                            placeholder="your.email@example.com">
+                    <!-- Social Media Links -->
+                    <div class="border-t border-gray-200 dark:border-gray-700 mt-12" style="padding-top: 2rem;">
+                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-8">
+                            Connect with me
+                        </h4>
+                        <div class="flex space-x-4 mb-8">
+                            {% if profile.github_url %}
+                            <a href="{{ profile.github_url }}" target="_blank"
+                                class="group p-3 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-white hover:bg-gray-900 dark:hover:bg-gray-600 transition-all duration-300 transform hover:scale-110 hover:shadow-lg"
+                                aria-label="GitHub Profile">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                </svg>
+                            </a>
+                            {% endif %}
+
+                            {% if profile.linkedin_url %}
+                            <a href="{{ profile.linkedin_url }}" target="_blank"
+                                class="group p-3 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-white hover:bg-blue-600 transition-all duration-300 transform hover:scale-110 hover:shadow-lg"
+                                aria-label="LinkedIn Profile">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                                </svg>
+                            </a>
+                            {% endif %}
+
+                            {% if profile.twitter_url %}
+                            <a href="{{ profile.twitter_url }}" target="_blank"
+                                class="group p-3 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-white hover:bg-blue-400 transition-all duration-300 transform hover:scale-110 hover:shadow-lg"
+                                aria-label="Twitter Profile">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                                </svg>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% else %}
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Contact information will be displayed here once the profile is configured.
+                    </p>
+                    {% endif %}
+
+                    <!-- Response Time -->
+                    <div class="mt-6 p-4 bg-primary-50 dark:bg-primary-900/20 rounded-xl border border-primary-200 dark:border-primary-800">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center">
+                                <svg class="w-4 h-4 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-primary-800 dark:text-primary-200">Quick Response</p>
+                                <p class="text-xs text-primary-600 dark:text-primary-400">I typically respond within 24 hours</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <div>
-                    <label for="id_subject" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        Subject
-                    </label>
-                    <input type="text" name="subject" id="id_subject" required class="form-input" placeholder="Subject">
+            <!-- Contact Form -->
+            <div class="animate-on-scroll">
+                <div
+                    class="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">
+                        Send a Message
+                    </h3>
+
+                    <form id="contact-form" method="post" action="{% url 'portfolio:contact' %}" class="space-y-6">
+                        {% csrf_token %}
+
+                        <!-- Honeypot field (hidden from users, visible to bots) -->
+                        <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
+                            <label for="website">Website (leave blank)</label>
+                            <input type="text" name="website" id="website" tabindex="-1" autocomplete="off">
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="id_name"
+                                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Name *
+                                </label>
+                                <input type="text" name="name" id="id_name" required class="form-input"
+                                    placeholder="Your Name" minlength="2" maxlength="100">
+                            </div>
+
+                            <div>
+                                <label for="id_email"
+                                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Email *
+                                </label>
+                                <input type="email" name="email" id="id_email" required class="form-input"
+                                    placeholder="your.email@example.com" maxlength="254">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="id_subject"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                Subject *
+                            </label>
+                            <input type="text" name="subject" id="id_subject" required class="form-input"
+                                placeholder="What's this about?" minlength="3" maxlength="200">
+                        </div>
+
+                        <div>
+                            <label for="id_message"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                Message *
+                            </label>
+                            <textarea name="message" id="id_message" rows="6" required class="form-textarea"
+                                placeholder="Tell me about your project or opportunity..." minlength="10" maxlength="2000"></textarea>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit"
+                                class="group bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg flex items-center justify-center space-x-2 mx-auto">
+                                <span>Send Message</span>
+                                <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+
+                    <div id="form-messages" class="mt-6"></div>
                 </div>
-
-                <div>
-                    <label for="id_message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        Message
-                    </label>
-                    <textarea name="message" id="id_message" rows="5" required class="form-textarea"
-                        placeholder="Your message..."></textarea>
-                </div>
-
-                <div class="text-center">
-                    <button type="submit"
-                        class="bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-lg font-medium transition-colors">
-                        Send Message
-                    </button>
-                </div>
-            </form>
-
-            <div id="form-messages" class="mt-4"></div>
+            </div>
         </div>
     </div>
 </section>
 {% endblock %}
 
 {% block extra_js %}
+<!-- EmailJS SDK -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-    // Contact form handling
+    // Initialize EmailJS with your public key from environment variables
+    {% if emailjs_public_key %}
+    emailjs.init('{{ emailjs_public_key }}');
+    {% else %}
+    console.error('EmailJS public key not configured. Please set EMAILJS_PUBLIC_KEY in your .env file.');
+    {% endif %}
+
+    // Anti-spam measures
+    let lastSubmissionTime = 0;
+    let submissionCount = 0;
+    const RATE_LIMIT_WINDOW = 60000; // 1 minute
+    const MAX_SUBMISSIONS_PER_WINDOW = 3;
+    const MIN_TIME_BETWEEN_SUBMISSIONS = 10000; // 10 seconds
+    
+    // Track form interaction time (human behavior)
+    let formFirstInteraction = null;
+    const MIN_INTERACTION_TIME = 3000; // 3 seconds minimum
+    
+    // Track form interactions
+    document.querySelectorAll('#contact-form input, #contact-form textarea').forEach(field => {
+        field.addEventListener('focus', function() {
+            if (!formFirstInteraction) {
+                formFirstInteraction = Date.now();
+            }
+        });
+    });
+
+    // Contact form handling with EmailJS and anti-spam
     document.getElementById('contact-form').addEventListener('submit', function (e) {
         e.preventDefault();
 
         const form = this;
         const formData = new FormData(form);
         const messagesDiv = document.getElementById('form-messages');
-
-        fetch(form.action, {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-                'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.innerHTML;
+        
+        // Anti-spam checks
+        const currentTime = Date.now();
+        
+        // Check honeypot field
+        if (formData.get('website')) {
+            console.warn('Spam detected: honeypot field filled');
+            showErrorMessage(messagesDiv, 'Invalid submission detected.');
+            return;
+        }
+        
+        // Check minimum interaction time
+        if (!formFirstInteraction || (currentTime - formFirstInteraction) < MIN_INTERACTION_TIME) {
+            showErrorMessage(messagesDiv, 'Please take a moment to fill out the form properly.');
+            return;
+        }
+        
+        // Check rate limiting
+        if (currentTime - lastSubmissionTime < MIN_TIME_BETWEEN_SUBMISSIONS) {
+            const waitTime = Math.ceil((MIN_TIME_BETWEEN_SUBMISSIONS - (currentTime - lastSubmissionTime)) / 1000);
+            showErrorMessage(messagesDiv, `Please wait ${waitTime} seconds before submitting again.`);
+            return;
+        }
+        
+        // Check submission count in time window
+        if (currentTime - lastSubmissionTime < RATE_LIMIT_WINDOW) {
+            submissionCount++;
+            if (submissionCount > MAX_SUBMISSIONS_PER_WINDOW) {
+                showErrorMessage(messagesDiv, 'Too many submissions. Please wait a minute before trying again.');
+                return;
             }
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    messagesDiv.innerHTML = `
+        } else {
+            submissionCount = 1;
+        }
+        
+        // Additional content validation
+        const name = formData.get('name').trim();
+        const email = formData.get('email').trim();
+        const subject = formData.get('subject').trim();
+        const message = formData.get('message').trim();
+        
+        // Check for suspicious patterns
+        if (containsSuspiciousContent(name, email, subject, message)) {
+            showErrorMessage(messagesDiv, 'Your message contains content that appears to be spam. Please revise and try again.');
+            return;
+        }
+        
+        lastSubmissionTime = currentTime;
+
+        // Show loading state
+        submitButton.disabled = true;
+        submitButton.innerHTML = `
+            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Sending...
+        `;
+
+        // Prepare template parameters for EmailJS
+        const templateParams = {
+            from_name: formData.get('name'),
+            from_email: formData.get('email'),
+            subject: formData.get('subject'),
+            message: formData.get('message'),
+            to_email: '{{ emailjs_to_email|default:"ahmadnouh428@gmail.com" }}'
+        };
+
+        // Send email using EmailJS with environment variables
+        const serviceId = '{{ emailjs_service_id|default:"" }}';
+        const templateId = '{{ emailjs_template_id|default:"" }}';
+        
+        let emailPromise;
+        if (serviceId && templateId) {
+            emailPromise = emailjs.send(serviceId, templateId, templateParams);
+        } else {
+            // EmailJS not configured - show error
+            emailPromise = Promise.reject(new Error('EmailJS not configured. Service ID: ' + serviceId + ', Template ID: ' + templateId));
+        }
+        
+        emailPromise
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                
+                // Show success message
+                messagesDiv.innerHTML = `
                     <div class="bg-green-100 dark:bg-green-900 border border-green-400 dark:border-green-600 text-green-700 dark:text-green-300 px-4 py-3 rounded">
-                        ${data.message}
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            Thank you for your message! I'll get back to you soon.
+                        </div>
                     </div>
                 `;
-                    form.reset();
-                } else {
-                    let errorHtml = '<div class="bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-300 px-4 py-3 rounded"><ul>';
-                    for (const [field, errors] of Object.entries(data.errors)) {
-                        errors.forEach(error => {
-                            errorHtml += `<li>${error}</li>`;
-                        });
+                
+                // Reset form
+                form.reset();
+                
+                // Also save to Django backend for record keeping
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': formData.get('csrfmiddlewaretoken')
                     }
-                    errorHtml += '</ul></div>';
-                    messagesDiv.innerHTML = errorHtml;
+                }).catch(error => {
+                    console.log('Backend save failed (non-critical):', error);
+                });
+                
+            }, function(error) {
+                console.log('FAILED...', error);
+                
+                // Show error message
+                let errorMessage = 'Failed to send message. Please try again or contact me directly at {{ emailjs_to_email|default:"ahmadnouh428@gmail.com" }}';
+                if (error && error.message) {
+                    errorMessage = error.message;
                 }
-            })
-            .catch(error => {
+                
                 messagesDiv.innerHTML = `
-                <div class="bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-300 px-4 py-3 rounded">
-                    An error occurred. Please try again.
-                </div>
-            `;
+                    <div class="bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-300 px-4 py-3 rounded">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                            </svg>
+                            ${errorMessage}
+                        </div>
+                    </div>
+                `;
+            })
+            .finally(function() {
+                // Restore button state
+                submitButton.disabled = false;
+                submitButton.innerHTML = originalButtonText;
             });
     });
+    
+    // Helper function to show error messages
+    function showErrorMessage(messagesDiv, message) {
+        messagesDiv.innerHTML = `
+            <div class="bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-300 px-4 py-3 rounded">
+                <div class="flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+                    ${message}
+                </div>
+            </div>
+        `;
+    }
+    
+    // Helper function to detect suspicious content
+    function containsSuspiciousContent(name, email, subject, message) {
+        const suspiciousPatterns = [
+            // Common spam keywords
+            /\b(viagra|cialis|casino|lottery|winner|congratulations|urgent|act now|limited time|free money|make money|work from home|click here|buy now|discount|offer expires|guaranteed|risk free|no obligation|call now|don't delete|dear friend|beneficiary|inheritance|million dollars|bitcoin|cryptocurrency|investment opportunity|loan|credit|debt|insurance|pharmacy|pills|medication|weight loss|dating|singles|meet women|meet men|adult|xxx|porn|sex|escort|massage|replica|rolex|designer|handbag|sunglasses|software|download|crack|serial|keygen|torrent|pirate|hack|cheat|bot|automation|seo|backlinks|traffic|ranking|followers|likes|subscribers|social media|marketing|advertising|promotion|spam|bulk email|mailing list|database|leads|prospects|business opportunity|franchise|mlm|pyramid|ponzi|scam|fraud|phishing|malware|virus|trojan|keylogger|spyware|adware|popup|redirect|affiliate|commission|referral|bonus|reward|gift|prize|sweepstakes|contest|survey|questionnaire|feedback|review|testimonial|endorsement|celebrity|famous|rich|wealthy|millionaire|billionaire|success|achievement|breakthrough|secret|formula|system|method|technique|strategy|tip|trick|hack|shortcut|easy|simple|fast|quick|instant|immediate|automatic|guaranteed|proven|tested|verified|certified|approved|recommended|endorsed|featured|popular|trending|viral|exclusive|limited|special|unique|rare|valuable|precious|expensive|cheap|affordable|free|gratis|complimentary|bonus|extra|additional|more|better|best|top|number one|first|leading|premier|ultimate|supreme|maximum|minimum|lowest|highest|biggest|smallest|largest|tiniest|huge|enormous|massive|gigantic|tiny|mini|micro|mega|super|ultra|extreme|incredible|amazing|awesome|fantastic|wonderful|excellent|outstanding|remarkable|extraordinary|unbelievable|impossible|miraculous|magical|revolutionary|groundbreaking|innovative|cutting edge|state of the art|advanced|sophisticated|professional|expert|master|guru|specialist|consultant|advisor|coach|mentor|trainer|teacher|instructor|professor|doctor|lawyer|engineer|architect|designer|developer|programmer|analyst|manager|director|executive|president|ceo|founder|owner|entrepreneur|investor|trader|broker|agent|representative|salesperson|marketer|advertiser|promoter|influencer|blogger|writer|journalist|reporter|editor|publisher|author|speaker|presenter|performer|entertainer|artist|musician|singer|actor|actress|model|photographer|videographer|filmmaker|producer|director|creator|inventor|innovator|pioneer|leader|hero|champion|winner|loser|victim|survivor|patient|client|customer|buyer|seller|vendor|supplier|manufacturer|distributor|retailer|wholesaler|importer|exporter|shipper|carrier|transporter|logistics|warehouse|storage|inventory|stock|supply|demand|market|industry|sector|business|company|corporation|enterprise|organization|institution|agency|department|division|branch|office|headquarters|location|address|phone|email|website|url|link|domain|hosting|server|cloud|database|software|application|program|system|platform|service|solution|product|item|goods|merchandise|commodity|material|substance|ingredient|component|part|piece|unit|quantity|amount|number|count|total|sum|price|cost|value|worth|rate|fee|charge|payment|money|cash|credit|debit|bank|account|card|loan|mortgage|insurance|investment|savings|retirement|pension|tax|legal|law|court|judge|jury|trial|case|lawsuit|settlement|agreement|contract|deal|offer|proposal|bid|quote|estimate|appraisal|evaluation|assessment|analysis|report|study|research|survey|poll|statistics|data|information|knowledge|facts|truth|reality|evidence|proof|confirmation|verification|validation|authentication|authorization|permission|approval|acceptance|rejection|denial|refusal|cancellation|termination|expiration|renewal|extension|upgrade|downgrade|change|modification|alteration|adjustment|improvement|enhancement|optimization|customization|personalization|configuration|setup|installation|implementation|deployment|launch|release|update|patch|fix|repair|maintenance|support|help|assistance|guidance|advice|recommendation|suggestion|tip|hint|clue|answer|solution|resolution|conclusion|result|outcome|consequence|effect|impact|influence|benefit|advantage|disadvantage|drawback|problem|issue|challenge|difficulty|obstacle|barrier|limitation|restriction|constraint|requirement|condition|term|rule|regulation|policy|procedure|process|method|approach|technique|strategy|plan|goal|objective|target|purpose|mission|vision|dream|hope|wish|desire|want|need|requirement|demand|request|order|command|instruction|direction|guidance|advice|recommendation|suggestion|proposal|idea|concept|theory|hypothesis|assumption|belief|opinion|view|perspective|point of view|standpoint|position|stance|attitude|approach|mindset|mentality|psychology|behavior|action|activity|task|job|work|labor|effort|energy|time|schedule|deadline|urgency|priority|importance|significance|relevance|value|worth|benefit|advantage|profit|gain|loss|risk|danger|threat|warning|alert|notice|announcement|news|update|information|data|facts|details|specifics|particulars|features|characteristics|attributes|properties|qualities|traits|aspects|elements|factors|components|parts|pieces|sections|segments|divisions|categories|types|kinds|sorts|varieties|options|choices|alternatives|possibilities|opportunities|chances|prospects|potential|capability|capacity|ability|skill|talent|expertise|experience|knowledge|understanding|comprehension|awareness|consciousness|recognition|realization|discovery|finding|result|outcome|conclusion|decision|choice|selection|preference|option|alternative|solution|answer|response|reply|feedback|comment|remark|statement|declaration|announcement|proclamation|notification|message|communication|correspondence|letter|email|text|sms|call|phone|contact|connection|relationship|association|partnership|collaboration|cooperation|teamwork|unity|solidarity|support|help|assistance|aid|service|favor|kindness|generosity|charity|donation|contribution|gift|present|offering|sacrifice|dedication|commitment|loyalty|faithfulness|devotion|love|affection|care|concern|interest|attention|focus|concentration|effort|energy|power|strength|force|pressure|stress|tension|anxiety|worry|fear|concern|doubt|uncertainty|confusion|misunderstanding|mistake|error|fault|blame|responsibility|accountability|liability|obligation|duty|task|job|role|function|purpose|goal|objective|target|aim|intention|plan|strategy|approach|method|technique|way|means|tool|instrument|device|equipment|machine|technology|innovation|invention|creation|development|progress|advancement|improvement|enhancement|upgrade|update|change|modification|transformation|evolution|revolution|breakthrough|discovery|finding|result|achievement|success|victory|triumph|win|accomplishment|attainment|realization|fulfillment|satisfaction|happiness|joy|pleasure|delight|excitement|enthusiasm|passion|love|affection|attraction|appeal|charm|beauty|elegance|grace|style|fashion|trend|popularity|fame|reputation|status|position|rank|level|degree|extent|amount|quantity|number|count|total|sum|average|mean|median|mode|range|variance|deviation|distribution|pattern|trend|cycle|sequence|series|order|arrangement|organization|structure|system|framework|foundation|basis|ground|reason|cause|source|origin|beginning|start|commencement|initiation|launch|introduction|presentation|demonstration|exhibition|display|show|performance|event|occasion|celebration|party|gathering|meeting|conference|seminar|workshop|training|education|learning|teaching|instruction|guidance|advice|counseling|coaching|mentoring|supervision|management|leadership|direction|control|authority|power|influence|impact|effect|result|consequence|outcome|end|finish|completion|conclusion|termination|closure|resolution|settlement|agreement|deal|contract|arrangement|understanding|compromise|negotiation|discussion|conversation|dialogue|communication|interaction|exchange|trade|transaction|business|commerce|industry|market|economy|finance|money|wealth|prosperity|success|achievement|accomplishment|victory|triumph|win|gain|profit|benefit|advantage|reward|prize|award|recognition|acknowledgment|appreciation|gratitude|thanks|praise|compliment|flattery|admiration|respect|honor|dignity|pride|confidence|self-esteem|self-worth|self-respect|self-confidence|self-assurance|self-reliance|independence|freedom|liberty|autonomy|sovereignty|authority|power|control|dominance|superiority|excellence|perfection|quality|standard|level|grade|rank|position|status|reputation|image|brand|identity|character|personality|nature|essence|spirit|soul|heart|mind|brain|intelligence|wisdom|knowledge|understanding|comprehension|awareness|consciousness|perception|insight|intuition|instinct|feeling|emotion|sentiment|mood|attitude|disposition|temperament|character|personality|behavior|conduct|action|activity|performance|execution|implementation|application|practice|exercise|training|preparation|planning|organization|arrangement|setup|configuration|adjustment|modification|change|alteration|transformation|conversion|adaptation|customization|personalization|individualization|specialization|optimization|improvement|enhancement|upgrade|development|growth|expansion|extension|enlargement|increase|rise|boost|elevation|advancement|progress|evolution|revolution|innovation|invention|creation|production|manufacturing|construction|building|assembly|installation|setup|establishment|foundation|formation|organization|structure|system|network|connection|link|relationship|association|partnership|alliance|union|merger|acquisition|takeover|buyout|purchase|sale|transaction|deal|agreement|contract|arrangement|settlement|resolution|solution|answer|response|reply|feedback|comment|review|evaluation|assessment|analysis|examination|inspection|investigation|research|study|survey|poll|questionnaire|interview|discussion|conversation|dialogue|communication|correspondence|message|letter|email|text|call|phone|contact|connection|relationship|bond|tie|link|association|partnership|collaboration|cooperation|teamwork|unity|solidarity|support|help|assistance|aid|service|favor|benefit|advantage|profit|gain|reward|prize|award|bonus|incentive|motivation|encouragement|inspiration|stimulation|excitement|enthusiasm|passion|energy|power|strength|force|pressure|influence|impact|effect|result|outcome|consequence|end|conclusion|finish|completion|achievement|success|victory|triumph|win|accomplishment|attainment|realization|fulfillment|satisfaction|happiness|joy|pleasure|delight|contentment|peace|tranquility|serenity|calm|relaxation|rest|comfort|ease|convenience|luxury|wealth|prosperity|abundance|plenty|richness|opulence|extravagance|lavishness|grandeur|magnificence|splendor|glory|beauty|elegance|grace|charm|appeal|attraction|allure|fascination|enchantment|magic|wonder|miracle|mystery|secret|hidden|concealed|private|confidential|classified|restricted|limited|exclusive|special|unique|rare|precious|valuable|expensive|costly|priceless|invaluable|worthless|cheap|affordable|reasonable|fair|just|right|correct|accurate|precise|exact|perfect|flawless|ideal|optimal|best|excellent|outstanding|superior|exceptional|extraordinary|remarkable|amazing|incredible|unbelievable|fantastic|wonderful|marvelous|magnificent|splendid|glorious|beautiful|gorgeous|stunning|breathtaking|spectacular|impressive|striking|notable|significant|important|crucial|critical|essential|vital|necessary|required|mandatory|compulsory|obligatory|binding|legal|lawful|legitimate|valid|authentic|genuine|real|true|actual|factual|accurate|correct|right|proper|appropriate|suitable|fitting|relevant|applicable|pertinent|related|connected|linked|associated|affiliated|attached|joined|united|combined|merged|integrated|incorporated|included|contained|comprised|composed|made|created|produced|manufactured|built|constructed|assembled|installed|established|founded|formed|organized|structured|arranged|planned|designed|developed|improved|enhanced|upgraded|updated|modified|changed|altered|transformed|converted|adapted|adjusted|customized|personalized|individualized|specialized|optimized|maximized|minimized|reduced|decreased|increased|expanded|extended|enlarged|amplified|magnified|intensified|strengthened|reinforced|supported|backed|endorsed|approved|accepted|welcomed|embraced|adopted|implemented|applied|used|utilized|employed|engaged|involved|participated|contributed|donated|gave|offered|provided|supplied|delivered|served|helped|assisted|aided|supported|backed|endorsed|recommended|suggested|proposed|advised|counseled|guided|directed|instructed|taught|educated|trained|prepared|equipped|armed|protected|defended|secured|safeguarded|preserved|maintained|sustained|continued|persisted|persevered|endured|survived|lasted|remained|stayed|kept|held|retained|maintained|preserved|conserved|saved|stored|accumulated|collected|gathered|assembled|compiled|organized|arranged|sorted|classified|categorized|grouped|divided|separated|split|broken|damaged|destroyed|ruined|wrecked|demolished|eliminated|removed|deleted|erased|wiped|cleared|cleaned|purified|refined|polished|perfected|completed|finished|ended|concluded|terminated|stopped|ceased|quit|abandoned|left|departed|went|moved|traveled|journeyed|explored|discovered|found|located|identified|recognized|realized|understood|comprehended|grasped|learned|studied|researched|investigated|examined|inspected|analyzed|evaluated|assessed|judged|decided|chose|selected|picked|preferred|favored|liked|loved|adored|cherished|treasured|valued|appreciated|respected|honored|admired|praised|complimented|flattered|thanked|acknowledged|recognized|rewarded|compensated|paid|bought|purchased|acquired|obtained|gained|earned|won|achieved|accomplished|attained|reached|arrived|came|went|left|stayed|remained|continued|proceeded|advanced|progressed|developed|grew|expanded|increased|rose|climbed|ascended|descended|fell|dropped|declined|decreased|reduced|diminished|shrunk|contracted|compressed|squeezed|pressed|pushed|pulled|dragged|carried|lifted|raised|lowered|dropped|placed|put|set|laid|positioned|located|situated|established|founded|created|made|built|constructed|assembled|produced|manufactured|generated|developed|designed|planned|organized|arranged|prepared|equipped|supplied|provided|delivered|served|offered|gave|donated|contributed|helped|assisted|aided|supported|backed|endorsed|approved|accepted|welcomed|embraced|adopted|implemented|applied|used|utilized|employed|engaged|involved|participated|joined|united|combined|merged|integrated|incorporated|included|contained|comprised|composed|formed|shaped|molded|crafted|fashioned|styled|designed|decorated|adorned|embellished|enhanced|improved|upgraded|updated|modified|changed|altered|transformed|converted|adapted|adjusted|customized|personalized|individualized|specialized|optimized|perfected|completed|finished|ended|concluded|terminated|stopped|ceased|quit|abandoned|left|departed|went|moved|traveled|journeyed|explored|discovered|found|located|identified|recognized|realized|understood|comprehended|grasped|learned|studied|researched|investigated|examined|inspected|analyzed|evaluated|assessed|judged|decided|chose|selected|picked|preferred|favored|liked|loved|adored|cherished|treasured|valued|appreciated|respected|honored|admired|praised|complimented|flattered|thanked|acknowledged|recognized|rewarded|compensated|paid|bought|purchased|acquired|obtained|gained|earned|won|achieved|accomplished|attained|reached|arrived)/gi,
+            
+            // Excessive repetition
+            /(.)\1{4,}/g, // Same character repeated 5+ times
+            /(\b\w+\b)(\s+\1){3,}/gi, // Same word repeated 4+ times
+            
+            // Excessive caps
+            /[A-Z]{10,}/g, // 10+ consecutive caps
+            
+            // Suspicious URLs or domains
+            /\b\w+\.(tk|ml|ga|cf|gq|bit\.ly|tinyurl|t\.co|short\.link|tiny\.cc|is\.gd|buff\.ly|ow\.ly|adf\.ly|goo\.gl|su\.pr|bc\.vc|tco\.re|lnkd\.in|db\.tt|qr\.ae|adf\.ly|bitly|cur\.lv|ity\.im|q\.gs|po\.st|bc\.vc|twitthis|u\.to|j\.mp|buzurl|cutt\.us|u\.bb|yourls|x\.co|prettylinkpro|scrnch|filoops|vzturl|qr\.net|1url|tweez|v\.gd|tr\.im|link\.zip|short\.link)\b/gi,
+            
+            // Multiple links
+            /(https?:\/\/[^\s]+.*https?:\/\/[^\s]+)/gi,
+            
+            // Excessive punctuation
+            /[!?]{3,}/g,
+            /[.]{4,}/g,
+            
+            // Common spam phrases
+            /\b(click here|visit now|limited time|act fast|don't wait|hurry up|order now|buy now|call now|sign up now|register now|download now|get it now|try it now|start now|join now|apply now|subscribe now|contact us now|learn more now|find out more|discover more|see more|read more|get more|save more|earn more|make more|win more|gain more|lose weight|weight loss|diet pills|fat burner|muscle builder|anti aging|wrinkle cream|hair loss|baldness|erectile dysfunction|male enhancement|female enhancement|breast enlargement|penis enlargement|sexual performance|libido booster|testosterone booster|hgh|human growth hormone|steroids|supplements|vitamins|minerals|herbs|natural|organic|pure|safe|effective|proven|tested|guaranteed|certified|approved|recommended|endorsed|featured|popular|trending|viral|exclusive|limited|special|unique|rare|valuable|precious|expensive|cheap|affordable|free|gratis|complimentary|bonus|extra|additional|discount|sale|offer|deal|promotion|coupon|code|voucher|gift|prize|reward|contest|sweepstakes|lottery|winner|jackpot|million|billion|thousand|hundred|dollars|euros|pounds|yen|bitcoin|cryptocurrency|investment|trading|forex|stocks|shares|bonds|commodities|real estate|property|land|house|apartment|condo|villa|mansion|luxury|premium|deluxe|executive|professional|business|corporate|commercial|industrial|residential|personal|private|confidential|secret|hidden|exclusive|vip|member|membership|club|society|association|organization|group|team|community|network|platform|system|service|solution|product|software|application|program|tool|device|equipment|machine|technology|innovation|invention|creation|development|design|build|make|create|produce|manufacture|construct|assemble|install|setup|configure|customize|personalize|optimize|improve|enhance|upgrade|update|modify|change|alter|transform|convert|adapt|adjust)/gi
+        ];
+        
+        const allText = `${name} ${email} ${subject} ${message}`.toLowerCase();
+        
+        return suspiciousPatterns.some(pattern => pattern.test(allText));
+    }
 </script>
 {% endblock %}

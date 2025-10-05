@@ -71,7 +71,12 @@
     - Optimize images with lazy loading and proper alt text
   - _Requirements: 4.1, 4.3, 9.1, 9.2_
 
-- [ ] 5. Implement contact section and form functionality
+- [x] 5. Implement contact section and form functionality
+
+
+
+
+
   - Create contact form with validation and CSRF protection
   - Add email sending functionality for form submissions
   - Display contact information and social media links
@@ -92,7 +97,15 @@
   - Ensure WCAG 2.1 compliance
   - _Requirements: 7.5, 8.3, 9.4_
 
-- [ ] 8. Create deployment documentation and populate initial data
+- [ ] 8. Create Dockerfile for deployment
+  - Create multi-stage Dockerfile for production deployment
+  - Configure static file collection and serving
+  - Set up proper environment variable handling
+  - Include health checks and security best practices
+  - Add docker-compose.yml for local development
+  - _Requirements: 8.4, 10.1_
+
+- [ ] 9. Create deployment documentation and populate initial data
   - Write comprehensive README with deployment instructions
   - Create production settings and environment configuration
   - Populate initial data based on resume information

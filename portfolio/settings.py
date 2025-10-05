@@ -22,6 +22,9 @@ env = environ.Env(
     DEBUG=(bool, True)
 )
 
+# Read .env file
+environ.Env.read_env(BASE_DIR / '.env')
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -151,3 +154,13 @@ X_FRAME_OPTIONS = 'DENY'
 # File upload settings
 FILE_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024  # 10MB
 DATA_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024  # 10MB
+
+# Email settings
+EMAIL_BACKEND = env('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='noreply@portfolio.com')
+
+# EmailJS settings
+EMAILJS_PUBLIC_KEY = env('EMAILJS_PUBLIC_KEY', default='')
+EMAILJS_SERVICE_ID = env('EMAILJS_SERVICE_ID', default='')
+EMAILJS_TEMPLATE_ID = env('EMAILJS_TEMPLATE_ID', default='')
+EMAILJS_TO_EMAIL = env('EMAILJS_TO_EMAIL', default='')
