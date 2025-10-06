@@ -25,7 +25,7 @@ FROM python:3.11-slim AS production
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     DJANGO_SETTINGS_MODULE=portfolio.settings \
-    PORT=8000 \
+    PORT=8001 \
     DJANGO_SUPERUSER_USERNAME=admin \
     DJANGO_SUPERUSER_EMAIL=admin@portfolio.com \
     DJANGO_SUPERUSER_PASSWORD=admin123
@@ -80,4 +80,4 @@ EXPOSE $PORT
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 # Default command
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "3", "--timeout", "120", "--access-logfile", "-", "--error-logfile", "-", "portfolio.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8001", "--workers", "3", "--timeout", "120", "--access-logfile", "-", "--error-logfile", "-", "portfolio.wsgi:application"]
