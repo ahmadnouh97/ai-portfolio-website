@@ -412,4 +412,7 @@ class Command(BaseCommand):
                 f'Successfully populated sample data!\n'
                 f'- Profile: {"Created" if Profile.objects.filter(id=1).exists() else "Skipped"}\n'
                 f'- Skills: {Skill.objects.count()} total\n'
-                f'- Experiences: {Experience.objects.count()} total
+                f'- Experiences: {Experience.objects.count()} total\n'
+                f'- Projects: {Project.objects.count()} total'
+            )
+        )

@@ -21,6 +21,7 @@ SECURE_HSTS_SECONDS = 31536000  # 1 year
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 X_FRAME_OPTIONS = 'DENY'
 
 # Session security
@@ -32,6 +33,9 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 # CSRF security
 CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_HTTPONLY = True
+CSRF_TRUSTED_ORIGINS =  [
+    "https://portfolio.nouhlab.com"
+]
 
 # Database configuration for production
 # Uncomment and configure for PostgreSQL in production

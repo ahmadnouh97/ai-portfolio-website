@@ -255,6 +255,9 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 # CSRF security
 CSRF_COOKIE_SECURE = not DEBUG
 CSRF_COOKIE_HTTPONLY = True
+CSRF_TRUSTED_ORIGINS =  [
+    "https://portfolio.nouhlab.com"
+]
 
 # Additional security headers
 if not DEBUG:
@@ -262,3 +265,4 @@ if not DEBUG:
     SECURE_HSTS_SECONDS = 31536000  # 1 year
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
