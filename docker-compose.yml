@@ -20,8 +20,8 @@ services:
       - DJANGO_SUPERUSER_EMAIL=${DJANGO_SUPERUSER_EMAIL:-admin@portfolio.com}
       - DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD:-admin123}
     volumes:
-      # Mount media files for persistence (accessible to nginx)
-      - ./media:/app/media
+      # Mount media files for persistence
+      - media_data:/app/media
       # Mount database directory for persistence
       - db_data:/app/data
       # Mount logs for debugging
